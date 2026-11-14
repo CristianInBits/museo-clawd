@@ -10,9 +10,17 @@ Los temas se eligen en el Museo, un panel encima de la caja de texto con una sal
 
 Es un proyecto de la comunidad, sin relación con Anthropic. Clawd es la mascota de Claude.
 
+<p align="center">
+  <img src="imagenes/ventana-anillos.png" width="820" alt="La aplicación de escritorio de Claude con el tema Anillos: un planeta gigante con anillos a la derecha, estrellas sobre un fondo casi negro y los paneles de cristal de la aplicación por encima">
+</p>
+
 ## Los temas
 
 Son doce, en cuatro salas. Todos son para el modo oscuro, salvo Cartografía, que sigue el modo de la aplicación: papel claro de día y papel azul tinta de noche.
+
+<p align="center">
+  <img src="imagenes/temas.png" width="820" alt="Las escenas de los doce temas, una fila por sala: Circuito, Horizonte y Constelación en Neón nocturno; Boreal, Austral y Bruma en Aurora; Marea, Cumbres e Isobaras en Cartografía, en papel de noche; y Singularidad, Anillos y Teselado en Espacio profundo">
+</p>
 
 | Sala | Tema | Cómo es |
 | --- | --- | --- |
@@ -32,6 +40,12 @@ Son doce, en cuatro salas. Todos son para el modo oscuro, salvo Cartografía, qu
 En todos, el centro de la escena queda despejado, porque ahí va la conversación.
 
 ## Cómo se usa
+
+<p align="center">
+  <img src="imagenes/museo-espacio.png" width="648" alt="El Museo en la sala Espacio profundo: los botones de las cuatro salas, Sin tema y Cerrar el Museo arriba; el Clawd pintor con su bocadillo, que dice cómo es Anillos; y los cuadros de Singularidad, Anillos y Teselado con sus placas, el de Anillos con el marco dorado y la palabra Puesto">
+  <br>
+  <img src="imagenes/museo-neon.png" width="642" alt="El Museo en la sala Neón nocturno, con los cuadros de Circuito, Horizonte y Constelación en sus marcos de madera">
+</p>
 
 - `/tema` abre el Museo encima de la caja de texto, en la sala del tema que tengas puesto. Los botones de arriba cambian de sala, la placa de cada cuadro pone ese tema, «Sin tema» lo quita y «Cerrar el Museo» lo cierra. El tema puesto lleva el marco dorado y la palabra «Puesto».
 - `/tema circuito`, o el nombre de cualquier otro tema, con o sin tildes, lo pone directamente.
