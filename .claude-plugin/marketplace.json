@@ -1,0 +1,6 @@
+{
+  "name": "museo-clawd",
+  "owner": { "name": "CristianInBits", "url": "https://github.com/CristianInBits" },
+  "description": "El mod museo-clawd para Claude Code: temas con escena de fondo, cristal y paleta para la aplicación de escritorio, elegidos en un Museo guiado por un Clawd pintor.",
+  "plugins": [{ "name": "museo-clawd", "source": "./" }]
+}

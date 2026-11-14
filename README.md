@@ -1,0 +1,91 @@
+# museo-clawd
+
+Mod de Claude Code que pone temas en la aplicación de escritorio. Cada tema hace tres cosas:
+
+- **Los colores:** pinta los colores de la propia aplicación (paneles, tarjetas, menús, texto, acentos y código).
+- **El fondo:** pone una escena detrás de la conversación, con los paneles de cristal encima.
+- **El indicador:** lleva un motivo animado junto a la línea que dice qué está haciendo Claude.
+
+Los temas se eligen en el Museo, un panel encima de la caja de texto con una sala por familia y un cuadro por tema. Lo guía un Clawd pintor que cuenta cómo es el tema que acabas de poner.
+
+Es un proyecto de la comunidad, sin relación con Anthropic. Clawd es la mascota de Claude.
+
+## Los temas
+
+Son doce, en cuatro salas. Todos son para el modo oscuro, salvo Cartografía, que sigue el modo de la aplicación: papel claro de día y papel azul tinta de noche.
+
+| Sala | Tema | Cómo es |
+| --- | --- | --- |
+| Neón nocturno | Circuito | Pistas de circuito en ángulo recto con impulsos de luz, sobre azul marino. |
+| Neón nocturno | Horizonte | Un sol a rayas sobre una cuadrícula rosa en perspectiva. |
+| Neón nocturno | Constelación | Nodos que brillan unidos por hilos, como una red. |
+| Aurora | Boreal | Cortinas de aurora verdes que ondulan sobre unas montañas. |
+| Aurora | Austral | Cortinas rosa y lila sobre el mar, con su reflejo. |
+| Aurora | Bruma | Luces suaves de turquesa, lila y verde que derivan. |
+| Cartografía | Marea | Una costa e islas rayadas, trazadas a plumilla con curvas de nivel. |
+| Cartografía | Cumbres | Picos con su triángulo, su cota y un sendero que los une. |
+| Cartografía | Isobaras | Un mapa del tiempo con una borrasca, un anticiclón y sus frentes. |
+| Espacio profundo | Singularidad | Un agujero negro con la luz curvada a su alrededor y su disco de luz ámbar. |
+| Espacio profundo | Anillos | Un planeta gigante con anillos, iluminado de lado por una estrella lejana. |
+| Espacio profundo | Teselado | Marcos de luz ámbar que se pierden en la distancia. |
+
+En todos, el centro de la escena queda despejado, porque ahí va la conversación.
+
+## Cómo se usa
+
+- `/tema` abre el Museo encima de la caja de texto, en la sala del tema que tengas puesto. Los botones de arriba cambian de sala, la placa de cada cuadro pone ese tema, «Sin tema» lo quita y «Cerrar el Museo» lo cierra. El tema puesto lleva el marco dorado y la palabra «Puesto».
+- `/tema circuito`, o el nombre de cualquier otro tema, con o sin tildes, lo pone directamente.
+- `/tema no` quita el tema y deja la aplicación con su aspecto.
+- `/tema lista` dice los temas de cada sala.
+
+El tema que elijas se guarda y vale para todas tus sesiones, también las que abras después.
+
+## Lo que hace falta
+
+- **La aplicación de escritorio de Claude, en una versión que dibuje temas.** Si la tuya no los dibuja, el Clawd del Museo lo dice con el motivo que da la aplicación. La aplicación del móvil dibuja el fondo y los colores, pero no el Museo. La terminal y los editores no dibujan temas.
+- **Fondos quietos:** de momento la aplicación de escritorio no anima los fondos, así que las escenas están pensadas para quedar bien quietas. Las animaciones que llevan escritas empezarán a moverse si algún día la aplicación las anima. Los motivos del indicador y el Clawd del Museo sí se mueven.
+- **Un tema a la vez:** solo puede haber un tema y gana el último que se pone, así que conviene no tener a la vez otro mod de temas.
+
+## Instalación
+
+Hay tres formas de instalarlo, según dónde uses Claude Code. Elige una sola, porque las tres hacen lo mismo. No hace falta cuenta de GitHub.
+
+**En la app de escritorio**, donde `/plugin` no funciona: pulsa el botón + junto al cuadro de texto, después **Plugins**, **Add marketplace** con `CristianInBits/museo-clawd`, y luego **Add plugin**.
+
+**En una sesión de Claude Code en la terminal**, escribe en el cuadro de la conversación:
+
+```
+/plugin install museo-clawd --marketplace CristianInBits/museo-clawd
+```
+
+**En una terminal normal**, como PowerShell en Windows o Terminal en Mac:
+
+```
+claude plugin install museo-clawd --marketplace CristianInBits/museo-clawd
+```
+
+Después, escribe `/tema` en una sesión de la app de escritorio para abrir el Museo.
+
+## Actualizar
+
+Cuando haya una versión nueva, ejecuta estas dos órdenes en una terminal normal, una detrás de otra y en este orden:
+
+```
+claude plugin marketplace update museo-clawd
+```
+
+```
+claude plugin update museo-clawd@museo-clawd
+```
+
+Después escribe `/reload-plugins` en una sesión abierta, o abre una sesión nueva.
+
+## De dónde salen los dibujos
+
+Los dibujos son propios. Los de Neón nocturno y Aurora están escritos a mano, y los de Cartografía y Espacio profundo los calculan los generadores de `herramientas/` (ver `herramientas/LEEME.md`). Cartografía toma el estilo de los mapas trazados con plóter. Espacio profundo toma el espíritu de la ciencia ficción del espacio: luz ámbar contra el negro y una escala enorme.
+
+## Licencia
+
+MIT, ver `LICENSE`. El dibujo del Clawd pintor viene de [clawd-pet](https://github.com/abderrahimghazali/clawd-pet), de Abderrahim Ghazali, con licencia MIT (ver `LICENSE-clawd-pet.txt`).
+
+El sistema de mods de Claude Code está en fase de pruebas y puede cambiar entre versiones.
