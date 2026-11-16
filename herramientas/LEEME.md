@@ -4,7 +4,7 @@ Los dibujos de dos de las cuatro salas del Museo no están hechos a mano: los ca
 
 | Generador | Escribe | Qué dibuja |
 | --- | --- | --- |
-| `genera_cartografia.mjs` | `hooks/cartografia.ts` | Marea, Cumbres e Isobaras: curvas de nivel calculadas sobre un relieve de bultos gaussianos y ondas suaves (marching squares), suavizadas (Chaikin) y simplificadas (Ramer-Douglas-Peucker), con el papel de día y el de noche. |
+| `genera_bushido.mjs` | `hooks/bushido.ts` | Ronin, Katana y Fortaleza: siluetas planas como las de los grabados japoneses (el ronin, la peña, el castillo con sus tejados de aleros levantados), montes de aguada con crestas calculadas, bandas de niebla, la banda oscura de lo alto del cielo y nubes con forma de pincelada que cruzan el sol y la luna. |
 | `genera_espacio.mjs` | `hooks/espacio.ts` | Singularidad, Anillos y Teselado: estrellas al azar, degradados, desenfoques y, en el disco del agujero negro, una textura de vetas hecha con ruido fractal. |
 
 Las escenas de Neón nocturno y Aurora están escritas a mano en `hooks/temas.ts`.
@@ -14,7 +14,7 @@ Las escenas de Neón nocturno y Aurora están escritas a mano en `hooks/temas.ts
 Cada generador recibe dos rutas: una carpeta donde deja cada escena suelta en SVG, para verla en un navegador, y el módulo del mod que escribe. La carpeta de los SVG conviene que esté fuera del repositorio.
 
 ```bash
-node herramientas/genera_cartografia.mjs <carpeta para los SVG> hooks/cartografia.ts
+node herramientas/genera_bushido.mjs <carpeta para los SVG> hooks/bushido.ts
 ```
 
 ```bash
@@ -27,4 +27,6 @@ Los dos son deterministas: con el mismo código escriben el mismo módulo, byte 
 
 La aplicación de escritorio guarda el dibujo de una escena mientras se llama igual. Después de cambiar cualquier escena hay que subir `VERSION_ESCENAS` en `hooks/temas.ts` (por ejemplo, de `v1` a `v2`) para que la aplicación la pida otra vez.
 
-En la aplicación de escritorio los fondos no se animan todavía, así que cada escena tiene que quedar bien quieta. Las animaciones CSS que llevan se quedan escritas para el día que la aplicación las mueva.
+La aplicación de escritorio mueve las escenas con las animaciones CSS que llevan en su `<style>`. Cada escena tiene que quedar bien también quieta, porque con la opción de reducir el movimiento del sistema las animaciones se paran y cada elemento se queda en la posición de sus atributos.
+
+Para ver un momento concreto del movimiento, se pone la escena dentro de una página, se congelan sus animaciones con un script (`document.getAnimations()`, `pause()` y `currentTime`) y se hace una captura con Edge sin ventana. Dentro de una página, los `<style>` de las escenas valen para toda ella, así que las clases propias de la página tienen que llevar un prefijo que no use ninguna escena.

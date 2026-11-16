@@ -1,6 +1,6 @@
 import type { ThemeColors } from 'claude-code'
 
-import { CUMBRES, ISOBARAS, MAREA } from './cartografia'
+import { FORTALEZA, KATANA, RONIN } from './bushido'
 import { ANILLOS, SINGULARIDAD, TESELADO } from './espacio'
 import { makeColors } from './make-colors.js'
 
@@ -8,16 +8,16 @@ import { makeColors } from './make-colors.js'
 // aplicación, el tinte de su cristal, su escena de fondo, el motivo de su indicador
 // y lo que dice el Clawd pintor cuando lo pones.
 //
-// En el fondo, la aplicación de escritorio no ejecuta animaciones (ni SMIL ni CSS),
-// aunque sí aplica los estilos fijos del <style> (comprobado el 14 de noviembre de
-// 2026, con el motor 2.1.325). Cada escena es un cuadro que queda bien quieto: cada
-// elemento animado tiene una posición fija buena en sus propios atributos, y la
-// animación CSS, que la sustituye cuando corre, queda escrita para el día que la
-// aplicación mueva los fondos. El indicador sí se mueve, con SMIL.
+// Las escenas se mueven despacio con animaciones CSS dentro de su <style>, que la
+// aplicación de escritorio ejecuta en el fondo (el 14 de noviembre de 2026 todavía no
+// lo hacía; el 16 de noviembre ya movía Neón nocturno). Cada escena es además un
+// cuadro que queda bien quieto: cada elemento animado tiene una posición fija buena
+// en sus propios atributos, la que se ve con «reducir movimiento» en el sistema. El
+// indicador se mueve con SMIL.
 
 // La aplicación guarda el dibujo mientras la escena se llama igual: cada cambio de
 // los dibujos sube esta versión para que la aplicación los pida otra vez.
-export const VERSION_ESCENAS = 'v1'
+export const VERSION_ESCENAS = 'v3'
 
 export type Tema = {
   id: string
@@ -39,7 +39,7 @@ export type Sala = { id: string; nombre: string }
 export const SALAS: Sala[] = [
   { id: 'neon', nombre: 'Neón nocturno' },
   { id: 'aurora', nombre: 'Aurora' },
-  { id: 'cartografia', nombre: 'Cartografía' },
+  { id: 'bushido', nombre: 'Bushidō' },
   { id: 'espacio', nombre: 'Espacio profundo' },
 ]
 
@@ -67,41 +67,6 @@ function paleta(nombre: string, id: string, a: Anclas, roles: Papeles, git?: Git
         },
       },
       ...(git !== undefined && { git }),
-    },
-  })
-}
-
-// La paleta de Cartografía, en los dos modos: papel claro con tinta de día y papel
-// azul tinta de noche. La aplicación pinta la mitad del modo en que esté.
-function paletaCartografia(nombre: string, id: string) {
-  return makeColors({
-    label: nombre,
-    id: `museo-clawd-${id}`,
-    roles: { accent: '#2b5797', danger: '#b8432f', success: '#3f7f4a', warning: '#a46f1c', pro: '#8a4f8f' },
-    light: {
-      gray: {
-        anchors: {
-          'surface-0': '#ece6d9',
-          'surface-1': '#f2ede3',
-          'surface-2': '#f8f4ec',
-          'text-primary': '#1d2330',
-          'text-secondary': '#474e60',
-          'text-muted': '#62687a',
-        },
-      },
-    },
-    dark: {
-      gray: {
-        anchors: {
-          'surface-0': '#121722',
-          'surface-1': '#171d29',
-          'surface-2': '#1c2230',
-          'surface-3': '#222938',
-          'text-primary': '#e9e5dc',
-          'text-secondary': '#bcb7ab',
-          'text-muted': '#928d83',
-        },
-      },
     },
   })
 }
@@ -225,14 +190,81 @@ ${NODOS.map(([x, y, r, c]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${c}"/
 
 // --- Aurora: Boreal, Austral y Bruma ---------------------------------------------
 
+// Las cortinas de Boreal ondulan de verdad: sus dos orillas son ondas que avanzan a lo
+// largo de la cortina. Cada fotograma es la misma figura con la fase corrida, y la
+// aplicación pasa de uno a otro con la propiedad CSS d, así que la onda avanza y no da
+// saltos al dar la vuelta. La segunda onda de cada orilla corre el doble de deprisa,
+// para que la forma no se repita siempre igual.
+type Onda = { base: number; a1: number; l1: number; a2: number; l2: number }
+
+function orilla(o: Onda, fase: number): [number, number][] {
+  const puntos: [number, number][] = []
+  for (let x = -40; x <= 370; x += 41) {
+    const y = o.base + o.a1 * Math.sin((2 * Math.PI * x) / o.l1 + fase) + o.a2 * Math.sin((2 * Math.PI * x) / o.l2 + 2 * fase + 1)
+    puntos.push([x, Math.round(y * 10) / 10])
+  }
+
+  return puntos
+}
+
+// Una curva suave por unos puntos (Catmull-Rom pasada a cúbicas), sin el punto de partida.
+function suave(p: [number, number][]): string {
+  const r = (n: number) => Math.round(n * 10) / 10
+  let d = ''
+  for (let i = 0; i < p.length - 1; i++) {
+    const a = p[Math.max(i - 1, 0)] as [number, number]
+    const b = p[i] as [number, number]
+    const c = p[i + 1] as [number, number]
+    const e = p[Math.min(i + 2, p.length - 1)] as [number, number]
+    d += `C${r(b[0] + (c[0] - a[0]) / 6)} ${r(b[1] + (c[1] - a[1]) / 6)} ${r(c[0] - (e[0] - b[0]) / 6)} ${r(c[1] - (e[1] - b[1]) / 6)} ${c[0]} ${c[1]}`
+  }
+
+  return d
+}
+
+function formaCortina(arriba: Onda, abajo: Onda, fase: number): string {
+  const sup = orilla(arriba, fase)
+  const inf = orilla(abajo, fase).reverse()
+  const [x0, y0] = sup[0] as [number, number]
+  const [x1, y1] = inf[0] as [number, number]
+
+  return `M${x0} ${y0}${suave(sup)}L${x1} ${y1}${suave(inf)}Z`
+}
+
+// Los fotogramas de una cortina: ocho fases en una vuelta, y el último es el primero.
+function ondula(nombre: string, arriba: Onda, abajo: Onda): string {
+  let k = `@keyframes ${nombre}{`
+  for (let j = 0; j < 8; j++) {
+    k += `${j === 0 ? '0%,100%' : `${j * 12.5}%`}{d:path("${formaCortina(arriba, abajo, (j * Math.PI) / 4)}")}`
+  }
+
+  return `${k}}`
+}
+
+const VERDE_ARRIBA: Onda = { base: 34, a1: 11, l1: 230, a2: 5, l2: 120 }
+const VERDE_ABAJO: Onda = { base: 99, a1: 8, l1: 260, a2: 4, l2: 140 }
+const TURQUESA_ARRIBA: Onda = { base: 60, a1: 10, l1: 200, a2: 4, l2: 110 }
+const TURQUESA_ABAJO: Onda = { base: 112, a1: 7, l1: 240, a2: 3, l2: 130 }
+
+// Los rayos de Boreal: tres grupos que repiten su rayo cada 105 unidades, a 35 unidades
+// uno de otro, y todos avanzan 105 unidades por vuelta, así que fluyen hacia un lado,
+// con la onda, sin saltos. Además, cada grupo late a su ritmo.
+const rayos = (x: number, y0: number, y1: number) =>
+  [...Array(6)].map((_, k) => `M${x + 105 * (k - 1)} ${y0}V${y1}`).join('')
+
 const BOREAL = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 150" preserveAspectRatio="xMidYMid slice">
 <style>
-.c1{animation:ondula1 16s ease-in-out infinite alternate}
-.c2{animation:ondula2 20s ease-in-out infinite alternate}
-.rayos{animation:rayos 7s ease-in-out infinite}
-@keyframes ondula1{from{transform:translate(0px,0px)}to{transform:translate(14px,-3px)}}
-@keyframes ondula2{from{transform:translate(0px,0px)}to{transform:translate(-12px,2px)}}
-@keyframes rayos{0%,100%{opacity:.25}50%{opacity:.6}}
+.c1{animation:onda1 16s linear infinite,brilla 6s ease-in-out infinite}
+.c2{animation:onda2 21s linear -7s infinite,brilla 7.5s ease-in-out -3s infinite}
+${ondula('onda1', VERDE_ARRIBA, VERDE_ABAJO)}
+${ondula('onda2', TURQUESA_ARRIBA, TURQUESA_ABAJO)}
+@keyframes brilla{50%{opacity:.7}}
+.flujo{animation:flujo 17s linear infinite}
+@keyframes flujo{to{transform:translateX(-105px)}}
+.r{animation:rayos 5s ease-in-out infinite}.r2{animation-duration:6.5s;animation-delay:-2s}.r3{animation-duration:4.2s;animation-delay:-3s}
+@keyframes rayos{0%,100%{opacity:.2}50%{opacity:.65}}
+.e{animation:titila 4s ease-in-out infinite}.e2{animation-duration:5.5s;animation-delay:-2s}
+@keyframes titila{50%{opacity:.2}}
 ${QUIETO}
 </style>
 <defs>
@@ -243,23 +275,27 @@ ${QUIETO}
 <filter id="rayo" x="-50%" y="-10%" width="200%" height="120%"><feGaussianBlur stdDeviation="1.5"/></filter>
 </defs>
 <rect width="330" height="150" fill="url(#cielo)"/>
-<g fill="#e4ecff"><circle cx="20" cy="15" r=".8"/><circle cx="70" cy="8" r=".7"/><circle cx="140" cy="20" r=".9"/><circle cx="210" cy="10" r=".7"/><circle cx="280" cy="18" r=".8"/><circle cx="310" cy="40" r=".6"/><circle cx="45" cy="45" r=".6"/></g>
+<g fill="#e4ecff"><circle cx="20" cy="15" r=".8"/><circle cx="70" cy="8" r=".7"/><circle class="e" cx="140" cy="20" r=".9"/><circle cx="210" cy="10" r=".7"/><circle class="e e2" cx="280" cy="18" r=".8"/><circle cx="310" cy="40" r=".6"/><circle cx="45" cy="45" r=".6"/></g>
 <g filter="url(#suave)">
-<path class="c1" fill="url(#verde)" d="M-30 30C40 10 90 60 160 35S280 55 360 25V90C290 110 220 80 150 100S30 95 -30 110Z"/>
-<path class="c2" fill="url(#turquesa)" d="M-30 55C60 35 110 85 190 60S300 80 360 55V105C280 125 200 95 130 115S20 110 -30 120Z"/>
+<path class="c1" fill="url(#verde)" d="${formaCortina(VERDE_ARRIBA, VERDE_ABAJO, 0)}"/>
+<path class="c2" fill="url(#turquesa)" d="${formaCortina(TURQUESA_ARRIBA, TURQUESA_ABAJO, 0)}"/>
 </g>
-<path class="rayos" stroke="url(#verde)" stroke-width="2" opacity=".45" filter="url(#rayo)" d="M50 25V95M80 20V92M115 30V100M150 28V98M185 22V94M220 30V100M255 24V96M290 30V98"/>
+<g class="flujo" stroke="url(#verde)" stroke-width="2" filter="url(#rayo)">
+<path class="r" opacity=".45" d="${rayos(15, 25, 95)}"/><path class="r r2" opacity=".45" d="${rayos(50, 20, 92)}"/><path class="r r3" opacity=".45" d="${rayos(85, 30, 100)}"/>
+</g>
 <path fill="#04080f" d="M0 150V118L30 104L52 114L80 96L110 112L140 100L170 116L205 92L240 110L270 102L300 115L330 106V150Z"/>
 </svg>`
 
 const AUSTRAL = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 150" preserveAspectRatio="xMidYMid slice">
 <style>
-.c1{animation:ondula1 18s ease-in-out infinite alternate}
-.c2{animation:ondula2 15s ease-in-out infinite alternate}
-.reflejo{animation:reflejo 8s ease-in-out infinite}
-@keyframes ondula1{from{transform:translate(0px,0px)}to{transform:translate(-14px,2px)}}
-@keyframes ondula2{from{transform:translate(0px,0px)}to{transform:translate(12px,-2px)}}
-@keyframes reflejo{0%,100%{stroke-opacity:.2}50%{stroke-opacity:.5}}
+.c1{animation:ondula1 12s ease-in-out infinite alternate}
+.c2{animation:ondula2 10s ease-in-out -4s infinite alternate}
+@keyframes ondula1{from{transform:translate(8px,-1px) translate(165px,95px) skewX(-4deg) scale(1,1.05) translate(-165px,-95px)}to{transform:translate(-10px,1px) translate(165px,95px) skewX(4deg) scale(1,.95) translate(-165px,-95px)}}
+@keyframes ondula2{from{transform:translate(-8px,1px) translate(165px,105px) skewX(3deg) scale(1,.95) translate(-165px,-105px)}to{transform:translate(9px,-1px) translate(165px,105px) skewX(-4deg) scale(1,1.06) translate(-165px,-105px)}}
+.reflejo{animation:reflejo 6s ease-in-out infinite}.reflejo2{animation-duration:7.5s;animation-delay:-3s}
+@keyframes reflejo{0%,100%{stroke-opacity:.18;transform:translateX(0px)}50%{stroke-opacity:.55;transform:translateX(5px)}}
+.e{animation:titila 4.5s ease-in-out infinite}.e2{animation-duration:6s;animation-delay:-2.5s}
+@keyframes titila{50%{opacity:.2}}
 ${QUIETO}
 </style>
 <defs>
@@ -272,23 +308,29 @@ ${QUIETO}
 </defs>
 <rect width="330" height="150" fill="url(#cielo)"/>
 <rect width="330" height="112" fill="url(#ambar)"/>
-<g fill="#e4ecff"><circle cx="30" cy="12" r=".8"/><circle cx="95" cy="22" r=".7"/><circle cx="170" cy="9" r=".9"/><circle cx="240" cy="25" r=".7"/><circle cx="300" cy="12" r=".8"/></g>
+<g fill="#e4ecff"><circle class="e" cx="30" cy="12" r=".8"/><circle cx="95" cy="22" r=".7"/><circle class="e e2" cx="170" cy="9" r=".9"/><circle cx="240" cy="25" r=".7"/><circle cx="300" cy="12" r=".8"/></g>
 <g filter="url(#suave)">
 <path class="c1" fill="url(#lila)" d="M-30 20C50 5 100 50 170 30S290 45 360 20V80C290 100 210 75 140 92S30 88 -30 98Z"/>
 <path class="c2" fill="url(#rosa)" d="M-30 45C40 25 120 70 190 48S300 66 360 42V92C280 112 200 86 130 104S20 100 -30 108Z"/>
 </g>
 <rect y="112" width="330" height="38" fill="#0b0718"/>
-<path class="reflejo" stroke="#ff6f8e" stroke-opacity=".4" stroke-width="2" filter="url(#agua)" d="M40 120H140M180 126H300M90 134H220M20 142H110"/>
+<g stroke="#ff6f8e" stroke-width="2" filter="url(#agua)">
+<path class="reflejo" stroke-opacity=".4" d="M40 120H140M90 134H220"/><path class="reflejo reflejo2" stroke-opacity=".4" d="M180 126H300M20 142H110"/>
+</g>
 </svg>`
 
 const BRUMA = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 150" preserveAspectRatio="xMidYMid slice">
 <style>
-.b1{animation:deriva1 18s ease-in-out infinite alternate}
-.b2{animation:deriva2 21s ease-in-out infinite alternate}
-.b3{animation:deriva3 25s ease-in-out infinite alternate}
-@keyframes deriva1{from{transform:translate(0px,0px)}to{transform:translate(50px,17px)}}
-@keyframes deriva2{from{transform:translate(0px,0px)}to{transform:translate(-50px,0px)}}
-@keyframes deriva3{from{transform:translate(0px,0px)}to{transform:translate(40px,0px)}}
+.b1{animation:deriva1 9s ease-in-out infinite alternate,late1 7s ease-in-out infinite}
+.b2{animation:deriva2 11s ease-in-out -4s infinite alternate,late2 8.5s ease-in-out -3s infinite}
+.b3{animation:deriva3 13s ease-in-out -7s infinite alternate,late1 6s ease-in-out -2s infinite}
+.b4{animation:deriva4 18s ease-in-out -5s infinite alternate,late2 5s ease-in-out infinite}
+@keyframes deriva1{from{transform:translate(100px,45px) scale(.9) translate(-100px,-45px)}to{transform:translate(165px,68px) scale(1.15) translate(-100px,-45px)}}
+@keyframes deriva2{from{transform:translate(250px,85px) scale(1.1) translate(-250px,-85px)}to{transform:translate(175px,70px) scale(.88) translate(-250px,-85px)}}
+@keyframes deriva3{from{transform:translate(160px,145px) scale(1) translate(-160px,-145px)}to{transform:translate(225px,128px) scale(1.2) translate(-160px,-145px)}}
+@keyframes deriva4{from{transform:translate(55px,105px)}to{transform:translate(275px,40px)}}
+@keyframes late1{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes late2{0%,100%{opacity:.95}50%{opacity:.45}}
 ${QUIETO}
 </style>
 <defs>
@@ -296,11 +338,13 @@ ${QUIETO}
 <radialGradient id="turquesa"><stop offset="0" stop-color="#2dd4bf" stop-opacity=".65"/><stop offset="1" stop-color="#2dd4bf" stop-opacity="0"/></radialGradient>
 <radialGradient id="lila"><stop offset="0" stop-color="#a78bfa" stop-opacity=".6"/><stop offset="1" stop-color="#a78bfa" stop-opacity="0"/></radialGradient>
 <radialGradient id="verde"><stop offset="0" stop-color="#4ade80" stop-opacity=".4"/><stop offset="1" stop-color="#4ade80" stop-opacity="0"/></radialGradient>
+<radialGradient id="claro"><stop offset="0" stop-color="#5eead4" stop-opacity=".5"/><stop offset="1" stop-color="#5eead4" stop-opacity="0"/></radialGradient>
 </defs>
 <rect width="330" height="150" fill="url(#fondo)"/>
 <ellipse class="b1" cx="100" cy="45" rx="120" ry="60" fill="url(#turquesa)"/>
 <ellipse class="b2" cx="250" cy="85" rx="110" ry="65" fill="url(#lila)"/>
 <ellipse class="b3" cx="160" cy="145" rx="140" ry="45" fill="url(#verde)"/>
+<ellipse class="b4" cx="0" cy="0" rx="48" ry="32" fill="url(#claro)" transform="translate(150 80)"/>
 </svg>`
 
 // --- Los motivos del indicador: pequeños y con SMIL, que en el indicador sí se mueve ---
@@ -313,15 +357,14 @@ function cortina(arriba: string, abajo: string): string {
 }
 const M_BRUMA = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><defs><radialGradient id="g"><stop offset="0" stop-color="#2dd4bf" stop-opacity=".95"/><stop offset="1" stop-color="#2dd4bf" stop-opacity="0"/></radialGradient></defs><circle cx="20" cy="11" r="8" fill="url(#g)"><animate attributeName="r" values="6;10;6" dur="2s" repeatCount="indefinite"/></circle></svg>`
 
-// Los motivos de Cartografía: una pluma de plóter que dibuja su trazo una y otra vez.
-// La tinta cambia con el modo de la aplicación; la pluma es bermellón.
-const TINTA = '<style>.t{stroke:#2f3647}.p{fill:#d0552c}@media (prefers-color-scheme: dark){.t{stroke:#a6aec7}.p{fill:#e3804e}}</style>'
-function pluma(trazo: string, largoTrazo: number, extra = ''): string {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22">${TINTA}${extra}<path class="t" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="${largoTrazo}" d="${trazo}"><animate attributeName="stroke-dashoffset" values="${largoTrazo};0;0" keyTimes="0;.8;1" dur="2.4s" repeatCount="indefinite"/></path><circle class="p" r="1.8"><animateMotion dur="2.4s" keyPoints="0;1;1" keyTimes="0;.8;1" calcMode="linear" repeatCount="indefinite" path="${trazo}"/></circle></svg>`
-}
-const M_MAREA = pluma('M2 15C8 9 12 17 18 12S28 6 32 11S37 16 38 13', 46)
-const M_CUMBRES = pluma('M20 4C28 4 33 9 33 13C33 18 27 19 20 19C12 19 7 17 7 12C7 7 13 4 20 4Z', 75, '<path class="p" d="M20 9L23 14H17Z"/>')
-const M_ISOBARAS = pluma('M4 17C8 8 16 5 24 7S36 14 36 18', 48, '<path class="p" d="M9 11L13 11L11 7Z M17 7.5L21 7L19 3Z"/>')
+// Los motivos de Bushidō. Ronin: el sol rojo que se pinta de una sola pincelada, como
+// un círculo zen (ensō), y se desvanece; quieto, se queda pintado.
+const M_RONIN = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><circle cx="20" cy="11" r="7.6" fill="none" stroke="#c63d3a" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="47.8" stroke-dashoffset="4" transform="rotate(-80 20 11)"><animate attributeName="stroke-dashoffset" values="47.8;4;4" keyTimes="0;.65;1" dur="2.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0" keyTimes="0;.8;1" dur="2.2s" repeatCount="indefinite"/></circle></svg>`
+// Katana: un destello que recorre la hoja, de la guarda a la punta.
+const HOJA = 'M10.2 15.4Q24 10 37.5 3'
+const M_KATANA = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><path d="M9.2 16.2L2.8 19.3" stroke="#b83535" stroke-width="2.8" stroke-linecap="round"/><path d="M8 13.4L10.6 18.6" stroke="#b89862" stroke-width="1.7" stroke-linecap="round"/><path d="${HOJA}" fill="none" stroke="#89939b" stroke-width="1.9" stroke-linecap="round"/><circle r="1.5" fill="#f1ebdf"><animateMotion dur="1.6s" repeatCount="indefinite" path="${HOJA}"/><animate attributeName="opacity" values="0;1;0" dur="1.6s" repeatCount="indefinite"/></circle></svg>`
+// Fortaleza: una banda de niebla que pasa por delante de un castillo diminuto.
+const M_FORTALEZA = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><circle cx="32" cy="5" r="2.6" fill="#e5d9c6" opacity=".85"/><path fill="#3a363f" d="M13 19.5H27L25.8 16.4H14.2Z"/><rect x="15" y="12.8" width="10" height="3.8" fill="#7a727e"/><path fill="#0c0c0f" stroke="#e5d9c6" stroke-opacity=".55" stroke-width=".5" d="M10.5 13.6Q13 13.4 15.5 12L17 10.6H23L24.5 12Q27 13.4 29.5 13.6Q26 14 20 13.8Q14 14 10.5 13.6Z"/><rect x="16.8" y="7.4" width="6.4" height="3.4" fill="#7a727e"/><path fill="#0c0c0f" stroke="#e5d9c6" stroke-opacity=".55" stroke-width=".5" d="M13.5 8.2Q16 8 18 6.4L20 4.6L22 6.4Q24 8 26.5 8.2Q23.5 8.6 20 8.4Q16.5 8.6 13.5 8.2Z"/><path d="M18.6 4.9l-.8-1.6M21.4 4.9l.8-1.6" stroke="#b89862" stroke-width=".7" stroke-linecap="round"/><rect x="2" y="16.6" width="15" height="2.2" rx="1.1" fill="#e5d9c6" opacity=".4"><animateTransform attributeName="transform" type="translate" values="0 0;18 0;0 0" dur="3.2s" repeatCount="indefinite"/></rect></svg>`
 
 // Los motivos de Espacio profundo.
 const ORBITA = 'M6 12A14 3.6 0 1 0 34 12A14 3.6 0 1 0 6 12'
@@ -338,6 +381,16 @@ const M_TESELADO = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22">
 function paletaEspacio(nombre: string, id: string) {
   return paleta(nombre, id, ['#07070a', '#0c0c11', '#111118', '#17171f', '#f2ede4', '#c4bcae', '#948c80'],
     { accent: '#8fb8ff', danger: '#ff6b5b', success: '#6fcf97', warning: '#ffb000', pro: '#e9c27a' })
+}
+
+// La paleta de Bushidō, solo de noche: negro carbón y texto pergamino. El acento es
+// carmesí, un poco más frío que el de los dibujos, y el peligro va en bermellón: el
+// código pinta las palabras clave con el acento y los nombres con el peligro, y con
+// dos rojos iguales no se distinguirían. Éxito verde musgo, aviso oro e índigo acero
+// para pro.
+function paletaBushido(nombre: string, id: string) {
+  return paleta(nombre, id, ['#101116', '#15161c', '#1a1b22', '#202129', '#e5d9c6', '#c2b7a6', '#988f82'],
+    { accent: '#b8354a', danger: '#e8742a', success: '#8aa86a', warning: '#d9a441', pro: '#7f9cc4' })
 }
 
 // --- La tabla ---------------------------------------------------------------------
@@ -398,14 +451,12 @@ export const TEMAS: Tema[] = [
     paleta('Bruma', 'bruma', ['#081428', '#0b1a30', '#0d1d38', '#12243f', '#e6f0fa', '#a8bfd6', '#7f97b3'],
       { accent: '#8ea2ff', danger: '#ff5f6d', success: '#4ade80', warning: '#ffc857', pro: '#2dd4bf' }),
     BRUMA, M_BRUMA),
-  // Cartografía sigue el modo de la aplicación, así que su cristal no lleva tinte: la
-  // aplicación usa el color de panel de la paleta en cada modo.
-  nuevoTema('marea', 'Marea', 'Cartografía', '', 'Marea: una costa e islas rayadas, trazadas a plumilla.',
-    paletaCartografia('Marea', 'marea'), MAREA, M_MAREA),
-  nuevoTema('cumbres', 'Cumbres', 'Cartografía', '', 'Cumbres: picos con su cota y un sendero que los une.',
-    paletaCartografia('Cumbres', 'cumbres'), CUMBRES, M_CUMBRES),
-  nuevoTema('isobaras', 'Isobaras', 'Cartografía', '', 'Isobaras: una borrasca, un anticiclón y sus frentes.',
-    paletaCartografia('Isobaras', 'isobaras'), ISOBARAS, M_ISOBARAS),
+  nuevoTema('ronin', 'Ronin', 'Bushidō', '#140e10', 'Ronin: un guerrero solo ante un sol rojo enorme.',
+    paletaBushido('Ronin', 'ronin'), RONIN, M_RONIN),
+  nuevoTema('katana', 'Katana', 'Bushidō', '#0e1014', 'Katana: una hoja de acero que cruza la noche.',
+    paletaBushido('Katana', 'katana'), KATANA, M_KATANA),
+  nuevoTema('fortaleza', 'Fortaleza', 'Bushidō', '#101116', 'Fortaleza: un castillo sobre la colina, entre niebla y luna.',
+    paletaBushido('Fortaleza', 'fortaleza'), FORTALEZA, M_FORTALEZA),
   nuevoTema('singularidad', 'Singularidad', 'Espacio profundo', '#0a0806', 'Singularidad: la luz se curva alrededor de un agujero negro.',
     paletaEspacio('Singularidad', 'singularidad'), SINGULARIDAD, M_SINGULARIDAD),
   nuevoTema('anillos', 'Anillos', 'Espacio profundo', '#07090f', 'Anillos: un gigante de gas iluminado de lado por una estrella lejana.',

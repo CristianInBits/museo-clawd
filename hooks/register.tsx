@@ -18,7 +18,8 @@ const GUARDADO = 'tema'
 const AVISADO = 'avisado'
 
 // El cristal de todos los temas: 12 px de desenfoque y 30 % de opacidad. El tinte es
-// el de cada tema; los que siguen el modo de la aplicación no lo llevan.
+// el de cada tema; un tema sin tinte deja que la aplicación use el color de panel de
+// su paleta.
 const CRISTAL = { blur: 12, opacity: 0.3 }
 
 const ORO = '#c9a24f'
@@ -100,6 +101,12 @@ export const register: Register = on => {
     const t = typeof guardado === 'string' ? buscar(guardado) : undefined
     if (t !== undefined) {
       await aplicar($, t)
+    } else if (typeof guardado === 'string' && guardado !== 'no') {
+      // Un tema guardado que ya no está en el Museo, como los de Cartografía, que salió
+      // en la 0.2.0: se avisa una vez y se olvida, y la sesión empieza sin tema.
+      $.ui.toast(`museo-clawd: el tema «${guardado}» ya no está en el Museo. Escribe /tema para elegir otro.`)
+      await $.store.delete(GUARDADO)
+      await $.store.set(AVISADO, true)
     } else if (guardado === undefined && (await $.store.get(AVISADO)) === undefined) {
       $.ui.toast('museo-clawd: escribe /tema para abrir el Museo y elegir un tema.')
       await $.store.set(AVISADO, true)
