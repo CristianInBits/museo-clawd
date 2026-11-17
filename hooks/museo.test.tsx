@@ -189,7 +189,10 @@ test('el Museo enseña una sala cada vez y pone el tema de la placa que pulsas',
 
   expect(m.puestos[1]?.colors?.label).toBe('Anillos')
   expect(m.guardado.get('tema')).toBe('anillos')
-  expect(await ui.find({ type: 'Text', text: 'Puesto' })).toBeDefined()
+  // El tema puesto se reconoce por su marco dorado, sin ninguna palabra debajo.
+  expect((await ui.find({ key: 'marco-anillos' }))?.props.backgroundColor).toBe('#c9a24f')
+  expect((await ui.find({ key: 'marco-singularidad' }))?.props.backgroundColor).toBe('#5a4128')
+  expect(await ui.find({ type: 'Text', text: 'Puesto' })).toBeUndefined()
   expect(await ui.find({ type: 'Text', text: /Anillos: un gigante/ })).toBeDefined()
 
   await ui.press({ key: 'sala-bushido' })
@@ -198,6 +201,12 @@ test('el Museo enseña una sala cada vez y pone el tema de la placa que pulsas',
   expect((await ui.find({ key: 'sala-bushido' }))?.text).toBe('● Bushidō')
   expect(m.puestos[2]?.backdrop).toEqual({ scene: 'katana-v5', glass: { blur: 12, opacity: 0.3, tint: '#0e1014' } })
   expect(await ui.find({ type: 'Text', text: /Katana: una hoja de acero/ })).toBeDefined()
+
+  // La cruz cierra el Museo.
+  const cerrar = await ui.find({ key: 'cerrar' })
+  expect(cerrar?.text).toContain('✕')
+  await ui.press({ key: 'cerrar' })
+  expect(await ui.find({ key: 'placa-katana' })).toBeUndefined()
   await ui.unmount()
 })
 

@@ -191,7 +191,9 @@ export const register: Register = on => {
             />
           ))}
           <Button key="sin-tema" label="Sin tema" onPress={() => quitar($)} />
-          <Button key="cerrar" role="dismiss" label="Cerrar el Museo" onPress={() => update($, abierto, () => false)} />
+          {/* Una cruz cierra el Museo. La aplicación de escritorio pinta los botones a su
+              manera, en gris, y no respeta el color de lo que llevan dentro. */}
+          <Button key="cerrar" role="dismiss" label="✕" onPress={() => update($, abierto, () => false)} />
         </Box>
         <Box flexDirection="row" alignItems="flex-start" gap={2} flexWrap="wrap">
           <Box flexDirection="column" alignItems="center" gap={1} width={30}>
@@ -202,11 +204,12 @@ export const register: Register = on => {
           </Box>
           {temasDe(vista).map(t => (
             <Box flexDirection="column" alignItems="center" gap={1}>
-              <Box backgroundColor={actual?.id === t.id ? ORO : MADERA} padding={1}>
+              {/* El marco: dorado el del tema puesto, de madera los demás. El paso «xs» es
+                  más fino que una celda en la aplicación de escritorio. */}
+              <Box key={`marco-${t.id}`} backgroundColor={actual?.id === t.id ? ORO : MADERA} padding="xs">
                 <Svg source={t.escena} alt={`Cuadro de ${t.nombre}`} width={92} height={56} />
               </Box>
               <Button key={`placa-${t.id}`} label={t.nombre} onPress={() => poner($, t)} />
-              {actual?.id === t.id && <Text color={ORO}>Puesto</Text>}
             </Box>
           ))}
         </Box>

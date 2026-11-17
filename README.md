@@ -60,7 +60,7 @@ En todos, el centro de la escena queda despejado, porque ahí va la conversació
   <img src="imagenes/museo-neon.png" width="642" alt="El Museo en la sala Neón nocturno, con los cuadros de Circuito, Horizonte y Constelación en sus marcos de madera">
 </p>
 
-- `/tema` abre el Museo encima de la caja de texto, en la sala del tema que tengas puesto. Los botones de arriba cambian de sala, la placa de cada cuadro pone ese tema, «Sin tema» lo quita y «Cerrar el Museo» lo cierra. El tema puesto lleva el marco dorado y la palabra «Puesto».
+- `/tema` abre el Museo encima de la caja de texto, en la sala del tema que tengas puesto. Los botones de arriba cambian de sala, la placa de cada cuadro pone ese tema, «Sin tema» lo quita y la cruz lo cierra. El tema puesto lleva el marco dorado.
 - `/tema circuito`, o el nombre de cualquier otro tema, con o sin tildes, lo pone directamente.
 - `/tema no` quita el tema y deja la aplicación con su aspecto.
 - `/tema lista` dice los temas de cada sala.
