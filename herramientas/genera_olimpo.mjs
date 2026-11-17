@@ -10,7 +10,7 @@
 // movimiento». Lo que se mueve tiene bordes o brillo, porque en la aplicación lo blando
 // que se mueve despacio no se ve moverse; y lo grande se queda quieto y sin desenfoque,
 // para que la aplicación llegue a pintar a tiempo también en pantalla completa.
-import { CSS_ESTRELLAS, H, W, abrir, azar, banda, curva, escribir, estrellas, giro, mas, poli, pt, r1, r2 } from './comun.mjs'
+import { CSS_ESTRELLAS, H, W, abrir, azar, banda, curva, escribir, estrellas, giro, horizontal, mas, poli, pt, quiebra, r1, r2, radial, vertical } from './comun.mjs'
 
 const NOCHE = '#172a46'
 const CELESTE = '#567eaa'
@@ -36,20 +36,6 @@ function cortes([x1, y1, ra], [x2, y2, rb]) {
 }
 const corte = (a, b) => cortes(a, b)[0]
 
-// Parte cada tramo de una línea y desplaza su punto medio de lado, cada vez menos: así se
-// rompen los bordes de la roca y se quiebran los rayos.
-function quiebra(r, p, niveles, amp) {
-  for (let n = 0; n < niveles; n++, amp *= 0.55) {
-    const q = [p[0]]
-    for (let i = 0; i < p.length - 1; i++) {
-      const a = p[i], b = p[i + 1], dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1
-      const d = (r() - 0.5) * l * amp
-      q.push([(a[0] + b[0]) / 2 - (dy / l) * d, (a[1] + b[1]) / 2 + (dx / l) * d], b)
-    }
-    p = q
-  }
-  return p
-}
 
 // Una luna creciente: el círculo (cx, cy, r) menos otro algo menor corrido hacia arriba a
 // la derecha, así que la parte iluminada mira abajo a la izquierda.
@@ -133,10 +119,6 @@ function fila(semilla, x0, x1, base, rMin, rMax, ola = 0, sube = 0.8) {
   return l
 }
 
-// Un degradado vertical en coordenadas de la escena: [desplazamiento, color, opacidad].
-const vertical = (id, y0, y1, paradas) => `<linearGradient id="${id}" x1="0" y1="${y0}" x2="0" y2="${y1}" gradientUnits="userSpaceOnUse">${paradas.map(([o, c, a = 1]) => `<stop offset="${o}" stop-color="${c}"${a < 1 ? ` stop-opacity="${a}"` : ''}/>`).join('')}</linearGradient>`
-const horizontal = (id, x0, x1, paradas) => `<linearGradient id="${id}" x1="${x0}" y1="0" x2="${x1}" y2="0" gradientUnits="userSpaceOnUse">${paradas.map(([o, c, a = 1]) => `<stop offset="${o}" stop-color="${c}"${a < 1 ? ` stop-opacity="${a}"` : ''}/>`).join('')}</linearGradient>`
-const radial = (id, cx, cy, r, paradas) => `<radialGradient id="${id}" cx="${cx}" cy="${cy}" r="${r}" gradientUnits="userSpaceOnUse">${paradas.map(([o, c, a = 1]) => `<stop offset="${o}" stop-color="${c}"${a < 1 ? ` stop-opacity="${a}"` : ''}/>`).join('')}</radialGradient>`
 
 // --- Santuario --------------------------------------------------------------------
 // Un templo dórico de mármol en lo alto de una montaña que sale de un mar de nubes, a la

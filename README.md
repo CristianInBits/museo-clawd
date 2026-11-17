@@ -16,10 +16,10 @@ Es un proyecto de la comunidad, sin relación con Anthropic. Clawd es la mascota
 
 ## Los temas
 
-Son diecinueve, en seis salas, y todos son para el modo oscuro.
+Son veintidós, en siete salas, y todos son para el modo oscuro.
 
 <p align="center">
-  <img src="imagenes/temas.png" width="820" alt="Las escenas de los diecinueve temas, una fila por sala: Circuito, Horizonte y Constelación en Neón nocturno; Boreal, Austral y Bruma en Aurora; Ronin, Katana y Fortaleza en Bushidō; Singularidad, Anillos y Teselado en Espacio profundo; Drakkar, Jarl, Yggdrasil y Thor en Valhalla; y Santuario, Zeus y Oráculo en Olimpo">
+  <img src="imagenes/temas.png" width="820" alt="Las escenas de los veintidós temas, una fila por sala: Circuito, Horizonte y Constelación en Neón nocturno; Boreal, Austral y Bruma en Aurora; Ronin, Katana y Fortaleza en Bushidō; Singularidad, Anillos y Teselado en Espacio profundo; Drakkar, Jarl, Yggdrasil y Thor en Valhalla; Santuario, Zeus y Oráculo en Olimpo; y Hoplita, Falange y Termópilas en Esparta">
 </p>
 
 | Sala | Tema | Cómo es | Qué se mueve |
@@ -43,6 +43,9 @@ Son diecinueve, en seis salas, y todos son para el modo oscuro.
 | Olimpo | Santuario | Un templo dórico de mármol en lo alto de una montaña que sale de un mar de nubes, dorado por la luz del ocaso, con la luna creciente. | Un águila da vueltas sobre el templo, pasan jirones de nube por delante de la montaña, los cipreses se mecen, la puerta del templo brilla con el fuego de dentro y las estrellas titilan. |
 | Olimpo | Zeus | Un gran rayo de oro que cruza en diagonal un cielo de tormenta, entre nubes estilizadas con volutas. | Una luz recorre el rayo de arriba abajo, su halo late, saltan destellos alrededor y, a lo lejos, la tormenta se ilumina entre las nubes. |
 | Olimpo | Oráculo | Un busto de mármol con la corona de laurel, sobre un pedestal con la máxima de Delfos («conócete a ti mismo»), a la luz del fuego de un trípode, junto a una columna jónica y, a lo lejos, el tolo. | El fuego tiembla y su luz parpadea en el mármol, el humo sube en volutas, suben chispas y las cintas de la corona se mecen. |
+| Esparta | Hoplita | Un casco corintio monumental de bronce, de perfil, con la nasal, los ojos rasgados y las carrilleras en punta, y una sola cresta de crin roja que cae por la nuca, sobre el negro. | Un reflejo de oro cruza el bronce, el viento corre por la crin, la cresta se mece y suben chispas del fuego. |
+| Esparta | Falange | Una falange en formación cerrada que se pierde hacia el fondo, fila tras fila: escudos redondos de bronce con la lambda roja, cascos con su cresta y un bosque de lanzas contra el cielo rojo del alba. | Una ola de destellos recorre las puntas de las lanzas, las crestas de delante se mecen y pasa el polvo. |
+| Esparta | Termópilas | Un paso estrecho entre dos montañas oscuras y, al fondo, un horizonte rojo intenso; en el paso, pequeño, un hoplita de guardia con la lanza y el escudo, y lejos, en la llanura, las hogueras del enemigo. | La capa y la cresta ondean, el viento arrastra la arena por el paso, dos buitres dan vueltas y las hogueras parpadean. |
 
 En todos, el centro de la escena queda despejado, porque ahí va la conversación, y el movimiento es lento.
 
@@ -103,7 +106,7 @@ Después escribe `/reload-plugins` en una sesión abierta, o abre una sesión nu
 
 ## De dónde salen los dibujos
 
-Los dibujos son propios. Los de Neón nocturno y Aurora están escritos a mano, y los de Bushidō, Espacio profundo, Valhalla y Olimpo los calculan los generadores de `herramientas/` (ver `herramientas/LEEME.md`). Bushidō toma el espíritu de los grabados japoneses: siluetas planas, pocos elementos, bandas de niebla y negro, carmesí y pergamino. Espacio profundo toma el espíritu de la ciencia ficción del espacio: luz ámbar contra el negro y una escala enorme. Valhalla toma el de las sagas nórdicas: fiordos, barcos de madera, montañas escarpadas, guerreros y piedras rúnicas, sin fantasía exagerada. Olimpo toma el de la Grecia clásica: mármol blanco, templos de columnas, montañas entre nubes y detalles de oro sobre azules profundos; es la sala más luminosa.
+Los dibujos son propios. Los de Neón nocturno y Aurora están escritos a mano, y los de Bushidō, Espacio profundo, Valhalla, Olimpo y Esparta los calculan los generadores de `herramientas/` (ver `herramientas/LEEME.md`). Bushidō toma el espíritu de los grabados japoneses: siluetas planas, pocos elementos, bandas de niebla y negro, carmesí y pergamino. Espacio profundo toma el espíritu de la ciencia ficción del espacio: luz ámbar contra el negro y una escala enorme. Valhalla toma el de las sagas nórdicas: fiordos, barcos de madera, montañas escarpadas, guerreros y piedras rúnicas, sin fantasía exagerada. Olimpo toma el de la Grecia clásica: mármol blanco, templos de columnas, montañas entre nubes y detalles de oro sobre azules profundos; es la sala más luminosa. Esparta toma el de los hoplitas de la Grecia clásica: disciplina y austeridad, cascos corintios de bronce, escudos redondos, lanzas y capas rojas, sin fantasía.
 
 ## Licencia
 

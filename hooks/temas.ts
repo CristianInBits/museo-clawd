@@ -3,6 +3,7 @@ import type { ThemeColors } from 'claude-code'
 import { FORTALEZA, KATANA, RONIN } from './bushido'
 import { DRAKKAR, JARL, THOR, YGGDRASIL } from './valhalla'
 import { ORACULO, SANTUARIO, ZEUS } from './olimpo'
+import { FALANGE, HOPLITA, TERMOPILAS } from './esparta'
 import { ANILLOS, SINGULARIDAD, TESELADO } from './espacio'
 import { makeColors } from './make-colors.js'
 
@@ -45,6 +46,7 @@ export const SALAS: Sala[] = [
   { id: 'espacio', nombre: 'Espacio profundo' },
   { id: 'valhalla', nombre: 'Valhalla' },
   { id: 'olimpo', nombre: 'Olimpo' },
+  { id: 'esparta', nombre: 'Esparta' },
 ]
 
 type Anclas = [string, string, string, string, string, string, string]
@@ -394,6 +396,13 @@ const M_SANTUARIO = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"
 const M_ZEUS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><path d="M23.5 .8H30L24.6 8.6H28.6L16.4 21.4L20.2 11.6H16.4Z" fill="#c5a46d" stroke="#f3dca6" stroke-width=".6" stroke-linejoin="round"/><path d="M23.5 .8H30L24.6 8.6H28.6L16.4 21.4L20.2 11.6H16.4Z" fill="#fff6dc" opacity="0"><animate attributeName="opacity" values="0;0;.9;0;0" keyTimes="0;.55;.62;.75;1" dur="2.6s" repeatCount="indefinite"/></path><path d="M9 3.4L9.7 5.3L11.6 6L9.7 6.7L9 8.6L8.3 6.7L6.4 6L8.3 5.3Z" fill="#f3dca6"><animate attributeName="opacity" values=".2;1;.2" dur="1.8s" repeatCount="indefinite"/></path><path d="M33 13.4L33.5 14.7L34.8 15.2L33.5 15.7L33 17L32.5 15.7L31.2 15.2L32.5 14.7Z" fill="#f3dca6"><animate attributeName="opacity" values="1;.2;1" dur="2.2s" repeatCount="indefinite"/></path></svg>`
 const M_ORACULO = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><path d="M17.2 19.2A8.2 8.2 0 0 1 14.2 5.7M22.8 19.2A8.2 8.2 0 0 0 25.8 5.7" stroke="#a8864c" stroke-width=".9" fill="none"/><g fill="#c5a46d"><ellipse cx="15.3" cy="18.2" rx="2.5" ry="1.05" transform="rotate(195 15.3 18.2)"/><ellipse cx="24.7" cy="18.2" rx="2.5" ry="1.05" transform="rotate(-15 24.7 18.2)"/><ellipse cx="12.6" cy="15" rx="2.5" ry="1.05" transform="rotate(225 12.6 15)"/><ellipse cx="27.4" cy="15" rx="2.5" ry="1.05" transform="rotate(-45 27.4 15)"/><ellipse cx="11.8" cy="10.8" rx="2.5" ry="1.05" transform="rotate(255 11.8 10.8)"/><ellipse cx="28.2" cy="10.8" rx="2.5" ry="1.05" transform="rotate(-75 28.2 10.8)"/><ellipse cx="13.3" cy="6.8" rx="2.5" ry="1.05" transform="rotate(285 13.3 6.8)"/><ellipse cx="26.7" cy="6.8" rx="2.5" ry="1.05" transform="rotate(-105 26.7 6.8)"/></g><path d="M17.4 15.8H22.6L21.8 17.2H18.2Z" fill="#b58a48"/><g transform="translate(20 15.6)"><g><animateTransform attributeName="transform" type="scale" values="1 1;.9 1.15;1.06 .9;1 1" dur="1.2s" repeatCount="indefinite"/><path transform="translate(-20 -15.6)" d="M20 15.6C18.2 14.8 18.4 12.6 19.3 11.3C19.5 12.5 20.2 12.7 20.3 11.8C20.9 10.6 20.7 9.3 20.1 8.2C22 9.4 22.6 11.8 22 13.6C21.6 14.8 20.9 15.5 20 15.6Z" fill="#ffd27a"/></g></g></svg>`
 
+// Los motivos de Esparta: el casco corintio con su cresta roja, con un brillo que lo
+// cruza; tres escudos con la lambda, con un destello que corre por las puntas de las lanzas;
+// y el paso entre dos montañas, con el horizonte rojo que late y el guardián.
+const M_HOPLITA = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><defs><clipPath id="casco"><path d="M12.4 12.6C12 8.8 14.4 6 18.4 5.6C23.4 5.2 26.8 8 27.2 12.4C27.4 14.6 27.6 16.6 29 18.6L25.4 18.4L23.6 16.2L22.6 18.8C20 20.2 17.2 21 14.6 21.4C14.2 19.4 14.4 17 14.2 15.4L12.2 14.8Z"/></clipPath><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3cd8a"/><stop offset=".5" stop-color="#b68a4b"/><stop offset="1" stop-color="#4a3018"/></linearGradient></defs><path d="M13 6C12 2 16 .6 21 .8C26 1 30 3.5 31 8C31.5 11 30.5 14 29.5 16C28.8 12 27.6 9 25.5 7.4C22 5.6 17 5.4 13 6Z" fill="#b8403a"/><path d="M12.4 12.6C12 8.8 14.4 6 18.4 5.6C23.4 5.2 26.8 8 27.2 12.4C27.4 14.6 27.6 16.6 29 18.6L25.4 18.4L23.6 16.2L22.6 18.8C20 20.2 17.2 21 14.6 21.4C14.2 19.4 14.4 17 14.2 15.4L12.2 14.8Z" fill="url(#b)"/><path d="M12.6 11.6C14.4 10.8 16.6 11 18.4 12.4C16.8 13 15.2 13.2 13.8 13.2L13.8 16.2L12.6 15.6Z" fill="#151519"/><g clip-path="url(#casco)"><rect x="8" y="2" width="2.6" height="22" fill="#fff3d6" opacity=".6" transform="skewX(-14)"><animate attributeName="x" values="6;34;34" keyTimes="0;.55;1" dur="2.8s" repeatCount="indefinite"/></rect></g></svg>`
+const M_FALANGE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><defs><radialGradient id="e" cx=".35" cy=".35" r=".8"><stop offset="0" stop-color="#f3cd8a"/><stop offset=".55" stop-color="#b68a4b"/><stop offset="1" stop-color="#4a3018"/></radialGradient></defs><path d="M11.6 21V4M22.6 21V4M33.6 21V4" stroke="#ddd0b8" stroke-width=".9" opacity=".7"/><path d="M11.6 1L12.6 4.2H10.6ZM22.6 1L23.6 4.2H21.6ZM33.6 1L34.6 4.2H32.6Z" fill="#d9b06a"/><circle cx="31" cy="13.6" r="6.2" fill="url(#e)" stroke="#3a2614" stroke-width=".6"/><path d="M28.4 16.4L31 10.2L33.6 16.4" stroke="#a3302f" stroke-width="1.1" fill="none"/><circle cx="20" cy="13.6" r="6.2" fill="url(#e)" stroke="#3a2614" stroke-width=".6"/><path d="M17.4 16.4L20 10.2L22.6 16.4" stroke="#a3302f" stroke-width="1.1" fill="none"/><circle cx="9" cy="13.6" r="6.2" fill="url(#e)" stroke="#3a2614" stroke-width=".6"/><path d="M6.4 16.4L9 10.2L11.6 16.4" stroke="#a3302f" stroke-width="1.1" fill="none"/><path d="M0 -1.6L1 0L0 1.6L-1 0Z" fill="#fff6dc"><animateMotion dur="2.4s" repeatCount="indefinite" path="M11.6 2.4L22.6 2.4L33.6 2.4" keyPoints="0;.5;1;1" keyTimes="0;.25;.5;1" calcMode="linear"/><animate attributeName="opacity" values="0;1;1;1;0;0" keyTimes="0;.05;.25;.45;.5;1" dur="2.4s" repeatCount="indefinite"/></path></svg>`
+const M_TERMOPILAS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><defs><linearGradient id="c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1416" stop-opacity="0"/><stop offset=".65" stop-color="#a8372c"/><stop offset=".85" stop-color="#f08a45"/><stop offset="1" stop-color="#5a1c20"/></linearGradient></defs><path d="M9 1H31V22H9Z" fill="url(#c)"><animate attributeName="opacity" values=".75;1;.75" dur="3s" repeatCount="indefinite"/></path><path d="M0 22V1L8 3L13 12L16 22Z" fill="#151519"/><path d="M40 22V2L33 5L28 13L25 22Z" fill="#151519"/><path d="M8 3L13 12L16 22M33 5L28 13L25 22" stroke="#c4462f" stroke-width=".6" fill="none" opacity=".7"/><path d="M14 22Q20 18.6 26 22Z" fill="#0b0a0d"/><g fill="#0b0a0d"><path d="M18.6 5.5V20.2H19.3V5.5Z"/><path d="M18.95 4L19.6 6H18.3Z" fill="#d9b06a"/><circle cx="20.6" cy="11.4" r="1.2"/><path d="M19.9 12.3H21.3L21.9 16.4L21.3 20H20.8L20.6 17L20.3 20H19.8L19.6 16.4Z"/><circle cx="21.9" cy="14.4" r="2.2"/><path d="M19.8 10.6C20 9.4 21.4 9 22.4 9.6C23 10 23.2 10.8 23.1 11.6C22.7 10.8 22 10.4 21.2 10.6Z" fill="#3a0f12"/></g></svg>`
+
 // La paleta de Espacio profundo, solo de noche: negros cálidos, acento de luz de
 // estrella y oro para pro.
 function paletaEspacio(nombre: string, id: string) {
@@ -425,6 +434,14 @@ function paletaValhalla(nombre: string, id: string) {
 function paletaOlimpo(nombre: string, id: string) {
   return paleta(nombre, id, ['#111d32', '#15233b', '#1a2a45', '#20314f', '#eee8dc', '#bcc3cc', '#8e99ab'],
     { accent: '#8fb6e0', danger: '#e0735a', success: '#a8c48a', warning: '#d6b46f', pro: '#b9a0e0' })
+}
+
+// La paleta de Esparta, solo de noche: negro carbón y texto marfil. El acento es el bronce;
+// el peligro, el rojo espartano; y como el ámbar de los avisos se confundiría con el
+// bronce, el aviso es un amarillo oliva, el éxito un verde jade y pro un azul acero.
+function paletaEsparta(nombre: string, id: string) {
+  return paleta(nombre, id, ['#151519', '#1a1a1f', '#1f1f25', '#26262d', '#ddd0b8', '#b7ad9c', '#9a9286'],
+    { accent: '#c99a5e', danger: '#d9564d', success: '#8fc0a0', warning: '#d2d46a', pro: '#8ea7c9' })
 }
 
 // --- La tabla ---------------------------------------------------------------------
@@ -511,6 +528,12 @@ export const TEMAS: Tema[] = [
     paletaOlimpo('Zeus', 'zeus'), ZEUS, M_ZEUS),
   nuevoTema('oraculo', 'Oráculo', 'Olimpo', '#121c30', 'Oráculo: el busto laureado, a la luz del trípode de Delfos.',
     paletaOlimpo('Oráculo', 'oraculo'), ORACULO, M_ORACULO),
+  nuevoTema('hoplita', 'Hoplita', 'Esparta', '#17141a', 'Hoplita: un casco corintio de bronce con su cresta roja.',
+    paletaEsparta('Hoplita', 'hoplita'), HOPLITA, M_HOPLITA),
+  nuevoTema('falange', 'Falange', 'Esparta', '#181416', 'Falange: escudos y lanzas en formación, fila tras fila.',
+    paletaEsparta('Falange', 'falange'), FALANGE, M_FALANGE),
+  nuevoTema('termopilas', 'Termópilas', 'Esparta', '#1a1214', 'Termópilas: un hoplita guarda el paso ante el horizonte rojo.',
+    paletaEsparta('Termópilas', 'termopilas'), TERMOPILAS, M_TERMOPILAS),
 ]
 
 /** El tema por su nombre, con o sin tildes y en mayúsculas o minúsculas. */

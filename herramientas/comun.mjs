@@ -88,6 +88,26 @@ export function estrellas(semilla, cuantas, y0, y1, color = '#e6ebf0') {
   return s
 }
 
+// Parte cada tramo de una línea y desplaza su punto medio de lado, cada vez menos: así se
+// rompen los bordes de la roca y se quiebran los rayos.
+export function quiebra(r, p, niveles, amp) {
+  for (let n = 0; n < niveles; n++, amp *= 0.55) {
+    const q = [p[0]]
+    for (let i = 0; i < p.length - 1; i++) {
+      const a = p[i], b = p[i + 1], dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1
+      const d = (r() - 0.5) * l * amp
+      q.push([(a[0] + b[0]) / 2 - (dy / l) * d, (a[1] + b[1]) / 2 + (dx / l) * d], b)
+    }
+    p = q
+  }
+  return p
+}
+
+// Un degradado vertical en coordenadas de la escena: [desplazamiento, color, opacidad].
+export const vertical = (id, y0, y1, paradas) => `<linearGradient id="${id}" x1="0" y1="${y0}" x2="0" y2="${y1}" gradientUnits="userSpaceOnUse">${paradas.map(([o, c, a = 1]) => `<stop offset="${o}" stop-color="${c}"${a < 1 ? ` stop-opacity="${a}"` : ''}/>`).join('')}</linearGradient>`
+export const horizontal = (id, x0, x1, paradas) => `<linearGradient id="${id}" x1="${x0}" y1="0" x2="${x1}" y2="0" gradientUnits="userSpaceOnUse">${paradas.map(([o, c, a = 1]) => `<stop offset="${o}" stop-color="${c}"${a < 1 ? ` stop-opacity="${a}"` : ''}/>`).join('')}</linearGradient>`
+export const radial = (id, cx, cy, r, paradas) => `<radialGradient id="${id}" cx="${cx}" cy="${cy}" r="${r}" gradientUnits="userSpaceOnUse">${paradas.map(([o, c, a = 1]) => `<stop offset="${o}" stop-color="${c}"${a < 1 ? ` stop-opacity="${a}"` : ''}/>`).join('')}</radialGradient>`
+
 // Abre una escena de 1600 × 1000 con su estilo y un fondo liso.
 export const abrir = (fondo, estilo) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice"><style>${estilo}${QUIETO}</style><rect width="${W}" height="${H}" fill="${fondo}"/>`
 
