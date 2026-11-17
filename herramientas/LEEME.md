@@ -1,11 +1,12 @@
 # Herramientas
 
-Los dibujos de dos de las cuatro salas del Museo no están hechos a mano: los calculan estos generadores, que escriben los módulos del mod con las escenas ya listas.
+Los dibujos de tres de las cinco salas del Museo no están hechos a mano: los calculan estos generadores, que escriben los módulos del mod con las escenas ya listas. Los generadores nuevos comparten las piezas de `comun.mjs`: números al azar repetibles, curvas suaves, bandas que adelgazan, niebla, estrellas y la escritura de los archivos.
 
 | Generador | Escribe | Qué dibuja |
 | --- | --- | --- |
 | `genera_bushido.mjs` | `hooks/bushido.ts` | Ronin, Katana y Fortaleza: siluetas planas como las de los grabados japoneses (el ronin, la peña, el castillo con sus tejados de aleros levantados), montes de aguada con crestas calculadas, bandas de niebla, la banda oscura de lo alto del cielo y nubes con forma de pincelada que cruzan el sol y la luna. |
 | `genera_espacio.mjs` | `hooks/espacio.ts` | Singularidad, Anillos y Teselado: estrellas al azar, degradados, desenfoques y, en el disco del agujero negro, una textura de vetas hecha con ruido fractal. |
+| `genera_valhalla.mjs` | `hooks/valhalla.ts` | Drakkar, Jarl, Yggdrasil y Thor: montañas escarpadas con crestas al azar, un drakkar con su reflejo en el agua, un guerrero nórdico en silueta junto a una piedra rúnica, con nieve y cuervos, un árbol con el tronco de tres hebras que se retuercen y ramas que se reparten hasta las ramitas, con un ciervo, y Thor con el martillo en alto en una tormenta de rayos quebrados. |
 
 Las escenas de Neón nocturno y Aurora están escritas a mano en `hooks/temas.ts`.
 
@@ -21,7 +22,11 @@ node herramientas/genera_bushido.mjs <carpeta para los SVG> hooks/bushido.ts
 node herramientas/genera_espacio.mjs <carpeta para los SVG> hooks/espacio.ts
 ```
 
-Los dos son deterministas: con el mismo código escriben el mismo módulo, byte a byte. Por eso `.gitattributes` fuerza los finales de línea LF.
+```bash
+node herramientas/genera_valhalla.mjs <carpeta para los SVG> hooks/valhalla.ts
+```
+
+Todos son deterministas: con el mismo código escriben el mismo módulo, byte a byte. Por eso `.gitattributes` fuerza los finales de línea LF.
 
 ## Al cambiar un dibujo
 

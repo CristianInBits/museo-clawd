@@ -1,7 +1,7 @@
 {
   "name": "museo-clawd",
-  "version": "0.2.0",
-  "description": "Temas para la aplicación de escritorio de Claude Code: doce escenas de fondo con su cristal y su paleta, en cuatro salas, que eliges en un Museo guiado por un Clawd pintor.",
+  "version": "0.3.0",
+  "description": "Temas para la aplicación de escritorio de Claude Code: escenas de fondo en movimiento, con su cristal y su paleta, en varias salas, que eliges en un Museo guiado por un Clawd pintor.",
   "author": { "name": "CristianInBits", "url": "https://github.com/CristianInBits" },
   "homepage": "https://github.com/CristianInBits/museo-clawd",
   "repository": "https://github.com/CristianInBits/museo-clawd",

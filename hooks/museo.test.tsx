@@ -65,9 +65,11 @@ const BANDA = {
   view: {},
 }
 
-test('hay doce temas en cuatro salas, y la aplicación puede pintarlos todos', () => {
-  expect(TEMAS.length).toBe(12)
-  expect(SALAS.map(s => temasDe(s).length)).toEqual([3, 3, 3, 3])
+test('cada una de las cinco salas tiene al menos tres temas, y la aplicación puede pintarlos todos', () => {
+  expect(SALAS.length).toBe(5)
+  expect(TEMAS.length).toBe(16)
+  expect(SALAS.map(s => temasDe(s).length)).toEqual([3, 3, 3, 3, 4])
+  expect(new Set(TEMAS.map(t => t.id)).size).toBe(TEMAS.length)
   for (const t of TEMAS) {
     expect(t.problemas.filter(linea => linea.startsWith("Desktop won't paint"))).toEqual([])
     expect(t.escena.length).toBeLessThan(131072)
@@ -101,7 +103,7 @@ test('al empezar vuelve a poner el tema guardado: Ronin, solo de noche y con su 
   expect(m.puestos[0]?.colors?.label).toBe('Ronin')
   expect(m.puestos[0]?.colors?.inputs?.dark).toBeDefined()
   expect(m.puestos[0]?.colors?.inputs?.light).toBeUndefined()
-  expect(m.puestos[0]?.backdrop).toEqual({ scene: 'ronin-v3', glass: { blur: 12, opacity: 0.3, tint: '#140e10' } })
+  expect(m.puestos[0]?.backdrop).toEqual({ scene: 'ronin-v5', glass: { blur: 12, opacity: 0.3, tint: '#140e10' } })
 })
 
 test('un tema guardado que ya no está en el Museo se olvida con un solo aviso', async ($, on) => {
@@ -123,7 +125,7 @@ test('/tema singularidad lo pone con su tinte, lo guarda y contesta con el bocad
   const r = await tema($, 'Singularidad')
 
   expect(m.puestos[0]?.colors?.label).toBe('Singularidad')
-  expect(m.puestos[0]?.backdrop).toEqual({ scene: 'singularidad-v3', glass: { blur: 12, opacity: 0.3, tint: '#0a0806' } })
+  expect(m.puestos[0]?.backdrop).toEqual({ scene: 'singularidad-v5', glass: { blur: 12, opacity: 0.3, tint: '#0a0806' } })
   expect(m.guardado.get('tema')).toBe('singularidad')
   expect(r.text).toBe('Singularidad: la luz se curva alrededor de un agujero negro.')
 })
@@ -158,6 +160,7 @@ test('/tema lista y un nombre desconocido enseñan los temas sin poner ninguno',
 
   expect(lista.text).toContain('Bushidō: ronin, katana, fortaleza')
   expect(lista.text).toContain('Espacio profundo: singularidad, anillos, teselado')
+  expect(lista.text).toContain('Valhalla: drakkar, jarl, yggdrasil, thor')
   expect(lista.text).not.toContain('marea')
   expect(desconocido.text).toContain('No conozco el tema «volcán».')
   expect(m.puestos.length).toBe(0)
@@ -187,7 +190,7 @@ test('el Museo enseña una sala cada vez y pone el tema de la placa que pulsas',
   await ui.press({ key: 'placa-katana' })
 
   expect((await ui.find({ key: 'sala-bushido' }))?.text).toBe('● Bushidō')
-  expect(m.puestos[2]?.backdrop).toEqual({ scene: 'katana-v3', glass: { blur: 12, opacity: 0.3, tint: '#0e1014' } })
+  expect(m.puestos[2]?.backdrop).toEqual({ scene: 'katana-v5', glass: { blur: 12, opacity: 0.3, tint: '#0e1014' } })
   expect(await ui.find({ type: 'Text', text: /Katana: una hoja de acero/ })).toBeDefined()
   await ui.unmount()
 })

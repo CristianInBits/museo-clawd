@@ -1,10 +1,11 @@
 import type { ThemeColors } from 'claude-code'
 
 import { FORTALEZA, KATANA, RONIN } from './bushido'
+import { DRAKKAR, JARL, THOR, YGGDRASIL } from './valhalla'
 import { ANILLOS, SINGULARIDAD, TESELADO } from './espacio'
 import { makeColors } from './make-colors.js'
 
-// Los doce temas de museo-clawd, en cuatro salas: la paleta de cada uno para la
+// Los temas de museo-clawd, tres o más por sala: la paleta de cada uno para la
 // aplicación, el tinte de su cristal, su escena de fondo, el motivo de su indicador
 // y lo que dice el Clawd pintor cuando lo pones.
 //
@@ -17,7 +18,7 @@ import { makeColors } from './make-colors.js'
 
 // La aplicación guarda el dibujo mientras la escena se llama igual: cada cambio de
 // los dibujos sube esta versión para que la aplicación los pida otra vez.
-export const VERSION_ESCENAS = 'v3'
+export const VERSION_ESCENAS = 'v5'
 
 export type Tema = {
   id: string
@@ -41,6 +42,7 @@ export const SALAS: Sala[] = [
   { id: 'aurora', nombre: 'Aurora' },
   { id: 'bushido', nombre: 'Bushidō' },
   { id: 'espacio', nombre: 'Espacio profundo' },
+  { id: 'valhalla', nombre: 'Valhalla' },
 ]
 
 type Anclas = [string, string, string, string, string, string, string]
@@ -376,6 +378,14 @@ function marco(retraso: number): string {
 }
 const M_TESELADO = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22">${marco(0)}${marco(-0.6)}${marco(-1.2)}<circle cx="20" cy="11" r="1.2" fill="#fff3dd"/></svg>`
 
+// Los motivos de Valhalla: el drakkar que se mece sobre el agua, con su farol; el casco
+// con cuernos del jarl, con un brillo que lo cruza; el árbol del mundo, con una mota de
+// luz que sube por el tronco; y el martillo de Thor, junto a un rayo que destella.
+const M_DRAKKAR = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><path d="M1 19Q7 17 13 19T25 19T37 19" fill="none" stroke="#345567" stroke-width="1.4"/><g><animateTransform attributeName="transform" type="rotate" values="-6 20 16;6 20 16;-6 20 16" dur="2.6s" repeatCount="indefinite"/><path d="M20 15V2" stroke="#acb9b7" stroke-width="1"/><path d="M14 3H26L27 11Q20 12.5 13 11Z" fill="#647c72"/><path d="M6 13Q20 19 34 13Q34 9 37 7.5L37.5 8.5Q35.5 10 35.5 14Q20 21 7 15.5Q4 12 5 9.5L6 10Q5.5 12 6 13Z" fill="#acb9b7"/><circle cx="6.5" cy="11" r="1.2" fill="#d6a35f"/></g></svg>`
+const M_JARL = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><defs><clipPath id="cupula"><path d="M12 15C12 8 15.5 4 20 3C24.5 4 28 8 28 15Z"/></clipPath></defs><path d="M12.6 10.5C8.6 9.6 6.6 7 6.4 2.6C8 5.8 10.2 7.4 13.4 8Z" fill="#d6a35f"/><path d="M27.4 10.5C31.4 9.6 33.4 7 33.6 2.6C32 5.8 29.8 7.4 26.6 8Z" fill="#d6a35f"/><path d="M12 15C12 8 15.5 4 20 3C24.5 4 28 8 28 15Z" fill="#1d2f43" stroke="#acb9b7" stroke-width=".8"/><g clip-path="url(#cupula)"><rect x="13" y="2" width="2.4" height="14" fill="#fff3d6" opacity=".55" transform="skewX(-12)"><animate attributeName="x" values="10;30;30" keyTimes="0;.6;1" dur="2.6s" repeatCount="indefinite"/></rect></g><path d="M11 14.6H29V17H11Z" fill="#acb9b7"/><path d="M19 16.5H21V21H19Z" fill="#acb9b7"/></svg>`
+const M_THOR = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><path d="M17 11H20L21 21H16Z" fill="#647c72"/><path d="M8 3.5H25Q23.5 7.2 25 11H8Q9.5 7.2 8 3.5Z" fill="#acb9b7"/><path d="M11 7.2C13 6 15 6 17 7.2C19 8.4 21 8.4 23 7.2" stroke="#345567" stroke-width=".8" fill="none"/><path d="M33 0.5L28.5 9H32L29 17L37 6H33L36 0.5Z" fill="#fff3d6" opacity="0"><animate attributeName="opacity" values="0;1;.2;.9;0;0" keyTimes="0;.05;.1;.15;.25;1" dur="2.4s" repeatCount="indefinite"/></path></svg>`
+const M_YGGDRASIL = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><path d="M15 21Q19 17 18.5 12Q17 8 10 5.5M18.5 12Q21 7 29 4.5M18 9.5Q19 5 21.5 1.5M23 21Q20 17 21 12Q22 9 25 8M5 21Q12 19 19 20Q27 19 35 21" stroke="#647c72" stroke-width="1.7" fill="none" stroke-linecap="round"/><circle r="1.3" fill="#d6a35f"><animateMotion dur="2.2s" repeatCount="indefinite" path="M19.5 20Q21 15 19 11T21 3"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.75;1" dur="2.2s" repeatCount="indefinite"/></circle></svg>`
+
 // La paleta de Espacio profundo, solo de noche: negros cálidos, acento de luz de
 // estrella y oro para pro.
 function paletaEspacio(nombre: string, id: string) {
@@ -391,6 +401,14 @@ function paletaEspacio(nombre: string, id: string) {
 function paletaBushido(nombre: string, id: string) {
   return paleta(nombre, id, ['#101116', '#15161c', '#1a1b22', '#202129', '#e5d9c6', '#c2b7a6', '#988f82'],
     { accent: '#b8354a', danger: '#e8742a', success: '#8aa86a', warning: '#d9a441', pro: '#7f9cc4' })
+}
+
+// La paleta de Valhalla, solo de noche: azul noche nórdico y texto gris hielo. El acento
+// es azul hielo, el aviso lleva el ámbar del fuego, el éxito es verde musgo, el peligro
+// rojo óxido y pro un violeta frío, para que en el código no se junten dos colores.
+function paletaValhalla(nombre: string, id: string) {
+  return paleta(nombre, id, ['#101b26', '#142231', '#18283a', '#1d2f43', '#e4ecea', '#b3c1bf', '#8c9d9c'],
+    { accent: '#7fb3c9', danger: '#e2625a', success: '#a3d4ae', warning: '#d6a35f', pro: '#a597d6' })
 }
 
 // --- La tabla ---------------------------------------------------------------------
@@ -463,6 +481,14 @@ export const TEMAS: Tema[] = [
     paletaEspacio('Anillos', 'anillos'), ANILLOS, M_ANILLOS),
   nuevoTema('teselado', 'Teselado', 'Espacio profundo', '#0b0805', 'Teselado: marcos de luz que se pierden en la distancia.',
     paletaEspacio('Teselado', 'teselado'), TESELADO, M_TESELADO),
+  nuevoTema('drakkar', 'Drakkar', 'Valhalla', '#0f1a24', 'Drakkar: un barco vikingo que se mece entre los fiordos.',
+    paletaValhalla('Drakkar', 'drakkar'), DRAKKAR, M_DRAKKAR),
+  nuevoTema('jarl', 'Jarl', 'Valhalla', '#111a23', 'Jarl: un guerrero nórdico en la cresta nevada, junto a su piedra rúnica.',
+    paletaValhalla('Jarl', 'jarl'), JARL, M_JARL),
+  nuevoTema('yggdrasil', 'Yggdrasil', 'Valhalla', '#0e191c', 'Yggdrasil: el árbol del mundo, con runas que despiertan.',
+    paletaValhalla('Yggdrasil', 'yggdrasil'), YGGDRASIL, M_YGGDRASIL),
+  nuevoTema('thor', 'Thor', 'Valhalla', '#0d1620', 'Thor: el dios del trueno alza su martillo en la tormenta.',
+    paletaValhalla('Thor', 'thor'), THOR, M_THOR),
 ]
 
 /** El tema por su nombre, con o sin tildes y en mayúsculas o minúsculas. */
