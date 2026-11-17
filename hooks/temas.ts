@@ -4,6 +4,7 @@ import { FORTALEZA, KATANA, RONIN } from './bushido'
 import { DRAKKAR, JARL, THOR, YGGDRASIL } from './valhalla'
 import { ORACULO, SANTUARIO, ZEUS } from './olimpo'
 import { FALANGE, HOPLITA, TERMOPILAS } from './esparta'
+import { ANUBIS, FARAON, JEROGLIFICOS } from './kemet'
 import { ANILLOS, SINGULARIDAD, TESELADO } from './espacio'
 import { makeColors } from './make-colors.js'
 
@@ -47,6 +48,7 @@ export const SALAS: Sala[] = [
   { id: 'valhalla', nombre: 'Valhalla' },
   { id: 'olimpo', nombre: 'Olimpo' },
   { id: 'esparta', nombre: 'Esparta' },
+  { id: 'kemet', nombre: 'Kemet' },
 ]
 
 type Anclas = [string, string, string, string, string, string, string]
@@ -403,6 +405,13 @@ const M_HOPLITA = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><
 const M_FALANGE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><defs><radialGradient id="e" cx=".35" cy=".35" r=".8"><stop offset="0" stop-color="#f3cd8a"/><stop offset=".55" stop-color="#b68a4b"/><stop offset="1" stop-color="#4a3018"/></radialGradient></defs><path d="M11.6 21V4M22.6 21V4M33.6 21V4" stroke="#ddd0b8" stroke-width=".9" opacity=".7"/><path d="M11.6 1L12.6 4.2H10.6ZM22.6 1L23.6 4.2H21.6ZM33.6 1L34.6 4.2H32.6Z" fill="#d9b06a"/><circle cx="31" cy="13.6" r="6.2" fill="url(#e)" stroke="#3a2614" stroke-width=".6"/><path d="M28.4 16.4L31 10.2L33.6 16.4" stroke="#a3302f" stroke-width="1.1" fill="none"/><circle cx="20" cy="13.6" r="6.2" fill="url(#e)" stroke="#3a2614" stroke-width=".6"/><path d="M17.4 16.4L20 10.2L22.6 16.4" stroke="#a3302f" stroke-width="1.1" fill="none"/><circle cx="9" cy="13.6" r="6.2" fill="url(#e)" stroke="#3a2614" stroke-width=".6"/><path d="M6.4 16.4L9 10.2L11.6 16.4" stroke="#a3302f" stroke-width="1.1" fill="none"/><path d="M0 -1.6L1 0L0 1.6L-1 0Z" fill="#fff6dc"><animateMotion dur="2.4s" repeatCount="indefinite" path="M11.6 2.4L22.6 2.4L33.6 2.4" keyPoints="0;.5;1;1" keyTimes="0;.25;.5;1" calcMode="linear"/><animate attributeName="opacity" values="0;1;1;1;0;0" keyTimes="0;.05;.25;.45;.5;1" dur="2.4s" repeatCount="indefinite"/></path></svg>`
 const M_TERMOPILAS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><defs><linearGradient id="c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1416" stop-opacity="0"/><stop offset=".65" stop-color="#a8372c"/><stop offset=".85" stop-color="#f08a45"/><stop offset="1" stop-color="#5a1c20"/></linearGradient></defs><path d="M9 1H31V22H9Z" fill="url(#c)"><animate attributeName="opacity" values=".75;1;.75" dur="3s" repeatCount="indefinite"/></path><path d="M0 22V1L8 3L13 12L16 22Z" fill="#151519"/><path d="M40 22V2L33 5L28 13L25 22Z" fill="#151519"/><path d="M8 3L13 12L16 22M33 5L28 13L25 22" stroke="#c4462f" stroke-width=".6" fill="none" opacity=".7"/><path d="M14 22Q20 18.6 26 22Z" fill="#0b0a0d"/><g fill="#0b0a0d"><path d="M18.6 5.5V20.2H19.3V5.5Z"/><path d="M18.95 4L19.6 6H18.3Z" fill="#d9b06a"/><circle cx="20.6" cy="11.4" r="1.2"/><path d="M19.9 12.3H21.3L21.9 16.4L21.3 20H20.8L20.6 17L20.3 20H19.8L19.6 16.4Z"/><circle cx="21.9" cy="14.4" r="2.2"/><path d="M19.8 10.6C20 9.4 21.4 9 22.4 9.6C23 10 23.2 10.8 23.1 11.6C22.7 10.8 22 10.4 21.2 10.6Z" fill="#3a0f12"/></g></svg>`
 
+// Los motivos de Kemet: el nemes de frente, con sus franjas, la cobra y un brillo que lo
+// cruza; la cabeza de chacal de Anubis, que sacude una oreja; y un cartucho cuyos tres
+// signos se encienden uno tras otro.
+const M_FARAON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><defs><pattern id="f" patternUnits="userSpaceOnUse" width="40" height="2.6"><rect width="40" height="1.4" fill="#d8b25e"/><rect y="1.4" width="40" height="1.2" fill="#1d5389"/></pattern><clipPath id="n"><path d="M20 1.2C26 1.2 30 4 30.6 9L33.6 21L27.4 21L26 14C25.4 16.6 22.8 18 20 18C17.2 18 14.6 16.6 14 14L12.6 21L6.4 21L9.4 9C10 4 14 1.2 20 1.2Z"/></clipPath></defs><path d="M20 1.2C26 1.2 30 4 30.6 9L33.6 21L27.4 21L26 14C25.4 16.6 22.8 18 20 18C17.2 18 14.6 16.6 14 14L12.6 21L6.4 21L9.4 9C10 4 14 1.2 20 1.2Z" fill="url(#f)"/><path d="M20 4.6C23.4 4.6 25.2 7.2 25.2 10.8C25.2 14.4 22.8 16.8 20 16.8C17.2 16.8 14.8 14.4 14.8 10.8C14.8 7.2 16.6 4.6 20 4.6Z" fill="#0a0f15"/><path d="M15.2 6.6H24.8" stroke="#e6c272" stroke-width="1.2"/><path d="M16.6 9.6H18.8M21.2 9.6H23.4" stroke="#e6c272" stroke-width=".9"/><path d="M19 16.6H21L21.2 21H18.8Z" fill="#0a0f15"/><path d="M19 18H21M19 19.6H21" stroke="#c9a052" stroke-width=".5"/><path d="M20 5.8C19 4.6 19.2 3 20 2.2C20.8 3 21 4.6 20 5.8Z" fill="#e6c272"/><g clip-path="url(#n)"><rect x="4" y="0" width="2.4" height="22" fill="#fff6dc" opacity=".55" transform="skewX(-14)"><animate attributeName="x" values="4;38;38" keyTimes="0;.5;1" dur="3s" repeatCount="indefinite"/></rect></g></svg>`
+const M_ANUBIS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><path d="M27 16L30.5 9.6C31.4 7.6 30.8 5.6 29.2 4.8L28.6 4.6L29.6 0.6L27 4.2L25 3.8C22.6 5 20.6 6.6 17.6 7.6C14.6 8.6 11 8.8 7.6 9.6L7 10.6C11 11.2 14.8 11.4 18.4 12.4C20.8 13 22.4 14.6 23 16Z" fill="#0a0f15" stroke="#c9a052" stroke-width=".5" stroke-opacity=".6"/><g><animateTransform attributeName="transform" type="rotate" values="0 25.6 4;0 25.6 4;-16 25.6 4;4 25.6 4;0 25.6 4" keyTimes="0;.7;.78;.86;1" dur="3.2s" repeatCount="indefinite"/><path d="M24.4 4.4L25.2 -0.4L27 4Z" fill="#0a0f15" stroke="#c9a052" stroke-width=".5" stroke-opacity=".6"/></g><path d="M21.4 6.8C22.6 6.2 24 6.4 24.6 7C24 7.6 22.6 7.6 21.4 6.8ZM24.6 7L26.6 6.6" stroke="#e6c272" stroke-width=".7" fill="none"/><path d="M7.4 10.2L17 11" stroke="#c9a052" stroke-width=".5" opacity=".7"/><path d="M22.6 16.6C25 15.4 28.6 15.4 31 16.4" stroke="#c9a052" stroke-width="1.4" fill="none"/><path d="M22 18.6C24.8 17.2 29 17.2 31.8 18.4" stroke="#1c807c" stroke-width="1.4" fill="none"/><path d="M21.4 20.6C24.6 19 29.4 19 32.6 20.4" stroke="#2a5f9a" stroke-width="1.4" fill="none"/></svg>`
+const M_JEROGLIFICOS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><path d="M10 3.6H30C33.6 3.6 35.6 6.6 35.6 11C35.6 15.4 33.6 18.4 30 18.4H10C6.4 18.4 4.4 15.4 4.4 11C4.4 6.6 6.4 3.6 10 3.6ZM37.6 3.6V18.4" stroke="#c9a052" stroke-width="1.4" fill="#16202a"/><path d="M11.2 16.6V10.4M8.6 10.4H13.8M11.2 10.4C9.4 10.4 9.4 6 11.2 6C13 6 13 10.4 11.2 10.4" stroke="#e6c272" stroke-width="1.1" stroke-linecap="round" fill="none" opacity=".35"><animate attributeName="opacity" values=".35;1;.35;.35" keyTimes="0;0.10;0.30;1" dur="3.6s" repeatCount="indefinite"/></path><path d="M16.2 10C17.8 8 22.2 8 23.8 10C22.2 11.4 17.8 11.4 16.2 10ZM20 9.2A.6 .6 0 1 0 20.01 9.2M19 11.2L18 14.6M21 11.2Q22.6 14 24 13.4" stroke="#e6c272" stroke-width="1.1" stroke-linecap="round" fill="none" opacity=".35"><animate attributeName="opacity" values=".35;1;.35;.35" keyTimes="0;0.35;0.55;1" dur="3.6s" repeatCount="indefinite"/></path><path d="M29.4 11m-3.2 0a3.2 3.2 0 1 0 6.4 0a3.2 3.2 0 1 0 -6.4 0M29.4 11m-.7 0a.7 .7 0 1 0 1.4 0a.7 .7 0 1 0 -1.4 0" stroke="#e6c272" stroke-width="1.1" stroke-linecap="round" fill="none" opacity=".35"><animate attributeName="opacity" values=".35;1;.35;.35" keyTimes="0;0.60;0.80;1" dur="3.6s" repeatCount="indefinite"/></path></svg>`
+
 // La paleta de Espacio profundo, solo de noche: negros cálidos, acento de luz de
 // estrella y oro para pro.
 function paletaEspacio(nombre: string, id: string) {
@@ -442,6 +451,14 @@ function paletaOlimpo(nombre: string, id: string) {
 function paletaEsparta(nombre: string, id: string) {
   return paleta(nombre, id, ['#151519', '#1a1a1f', '#1f1f25', '#26262d', '#ddd0b8', '#b7ad9c', '#9a9286'],
     { accent: '#c99a5e', danger: '#d9564d', success: '#8fc0a0', warning: '#d2d46a', pro: '#8ea7c9' })
+}
+
+// La paleta de Kemet, solo de noche: negro profundo y texto arenisca. El acento es el
+// turquesa de la fayenza; el peligro, la cornalina; el éxito, la malaquita; el aviso, el oro;
+// y pro, el lapislázuli: las piedras de las joyas egipcias, todas distintas en el código.
+function paletaKemet(nombre: string, id: string) {
+  return paleta(nombre, id, ['#101820', '#141d27', '#18232f', '#1d2a37', '#ece2c8', '#c7b896', '#9a8e74'],
+    { accent: '#3cb8ae', danger: '#e0603c', success: '#8fca7a', warning: '#e3b44f', pro: '#7f9fe6' })
 }
 
 // --- La tabla ---------------------------------------------------------------------
@@ -534,6 +551,12 @@ export const TEMAS: Tema[] = [
     paletaEsparta('Falange', 'falange'), FALANGE, M_FALANGE),
   nuevoTema('termopilas', 'Termópilas', 'Esparta', '#1a1214', 'Termópilas: un hoplita guarda el paso ante el horizonte rojo.',
     paletaEsparta('Termópilas', 'termopilas'), TERMOPILAS, M_TERMOPILAS),
+  nuevoTema('faraon', 'Faraón', 'Kemet', '#121820', 'Faraón: el perfil del rey con su nemes, ante el disco solar.',
+    paletaKemet('Faraón', 'faraon'), FARAON, M_FARAON),
+  nuevoTema('anubis', 'Anubis', 'Kemet', '#10171e', 'Anubis: el dios chacal junto a la balanza del juicio.',
+    paletaKemet('Anubis', 'anubis'), ANUBIS, M_ANUBIS),
+  nuevoTema('jeroglificos', 'Jeroglíficos', 'Kemet', '#17130e', 'Jeroglíficos: una sala de columnas grabadas, con un haz de sol.',
+    paletaKemet('Jeroglíficos', 'jeroglificos'), JEROGLIFICOS, M_JEROGLIFICOS),
 ]
 
 /** El tema por su nombre, con o sin tildes y en mayúsculas o minúsculas. */

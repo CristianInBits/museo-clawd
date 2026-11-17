@@ -16,10 +16,10 @@ Es un proyecto de la comunidad, sin relación con Anthropic. Clawd es la mascota
 
 ## Los temas
 
-Son veintidós, en siete salas, y todos son para el modo oscuro.
+Son veinticinco, en ocho salas, y todos son para el modo oscuro.
 
 <p align="center">
-  <img src="imagenes/temas.png" width="820" alt="Las escenas de los veintidós temas, una fila por sala: Circuito, Horizonte y Constelación en Neón nocturno; Boreal, Austral y Bruma en Aurora; Ronin, Katana y Fortaleza en Bushidō; Singularidad, Anillos y Teselado en Espacio profundo; Drakkar, Jarl, Yggdrasil y Thor en Valhalla; Santuario, Zeus y Oráculo en Olimpo; y Hoplita, Falange y Termópilas en Esparta">
+  <img src="imagenes/temas.png" width="820" alt="Las escenas de los veinticinco temas, una fila por sala: Circuito, Horizonte y Constelación en Neón nocturno; Boreal, Austral y Bruma en Aurora; Ronin, Katana y Fortaleza en Bushidō; Singularidad, Anillos y Teselado en Espacio profundo; Drakkar, Jarl, Yggdrasil y Thor en Valhalla; Santuario, Zeus y Oráculo en Olimpo; Hoplita, Falange y Termópilas en Esparta; y Faraón, Anubis y Jeroglíficos en Kemet">
 </p>
 
 | Sala | Tema | Cómo es | Qué se mueve |
@@ -46,6 +46,9 @@ Son veintidós, en siete salas, y todos son para el modo oscuro.
 | Esparta | Hoplita | Un casco corintio monumental de bronce, de perfil, con la nasal, los ojos rasgados y las carrilleras en punta, y una sola cresta de crin roja que cae por la nuca, sobre el negro. | Un reflejo de oro cruza el bronce, el viento corre por la crin, la cresta se mece y suben chispas del fuego. |
 | Esparta | Falange | Una falange en formación cerrada que se pierde hacia el fondo, fila tras fila: escudos redondos de bronce con la lambda roja, cascos con su cresta y un bosque de lanzas contra el cielo rojo del alba. | Una ola de destellos recorre las puntas de las lanzas, las crestas de delante se mecen y pasa el polvo. |
 | Esparta | Termópilas | Un paso estrecho entre dos montañas oscuras y, al fondo, un horizonte rojo intenso; en el paso, pequeño, un hoplita de guardia con la lanza y el escudo, y lejos, en la llanura, las hogueras del enemigo. | La capa y la cresta ondean, el viento arrastra la arena por el paso, dos buitres dan vueltas y las hogueras parpadean. |
+| Kemet | Faraón | El perfil monumental de un faraón en silueta oscura, con el tocado nemes de franjas de oro y lapislázuli, la cobra en la frente, la barba trenzada y el collar de cuentas, ante un disco solar de oro del que bajan los rayos de Atón, acabados en manos; arriba, el techo de estrellas de las tumbas. | La luz baja por los rayos, un brillo cruza el nemes, la cobra destella y las estrellas titilan. |
+| Kemet | Anubis | El dios con cabeza de chacal, negro y oro, con la peluca de franjas, el collar, el faldellín, el cetro y el ankh, junto a la balanza del juicio, con el corazón en un platillo y la pluma de Maat en el otro; detrás, columnas de jeroglíficos grabados, muy tenues, entre un friso y una cenefa de colores. | La balanza oscila despacio, como si pesara, y algunos jeroglíficos del muro se encienden de oro, uno tras otro. |
+| Kemet | Jeroglíficos | Una sala de columnas de papiro con los capiteles abiertos y las inscripciones alrededor del fuste, un muro de sillares grabados y el disco solar alado en el arquitrabe, con un haz de sol que entra en diagonal y sombras hondas. | Flota el polvo en el haz de sol y, de vez en cuando, una golondrina cruza la sala. |
 
 En todos, el centro de la escena queda despejado, porque ahí va la conversación, y el movimiento es lento.
 
@@ -106,7 +109,7 @@ Después escribe `/reload-plugins` en una sesión abierta, o abre una sesión nu
 
 ## De dónde salen los dibujos
 
-Los dibujos son propios. Los de Neón nocturno y Aurora están escritos a mano, y los de Bushidō, Espacio profundo, Valhalla, Olimpo y Esparta los calculan los generadores de `herramientas/` (ver `herramientas/LEEME.md`). Bushidō toma el espíritu de los grabados japoneses: siluetas planas, pocos elementos, bandas de niebla y negro, carmesí y pergamino. Espacio profundo toma el espíritu de la ciencia ficción del espacio: luz ámbar contra el negro y una escala enorme. Valhalla toma el de las sagas nórdicas: fiordos, barcos de madera, montañas escarpadas, guerreros y piedras rúnicas, sin fantasía exagerada. Olimpo toma el de la Grecia clásica: mármol blanco, templos de columnas, montañas entre nubes y detalles de oro sobre azules profundos; es la sala más luminosa. Esparta toma el de los hoplitas de la Grecia clásica: disciplina y austeridad, cascos corintios de bronce, escudos redondos, lanzas y capas rojas, sin fantasía.
+Los dibujos son propios. Los de Neón nocturno y Aurora están escritos a mano, y los de Bushidō, Espacio profundo, Valhalla, Olimpo, Esparta y Kemet los calculan los generadores de `herramientas/` (ver `herramientas/LEEME.md`). Bushidō toma el espíritu de los grabados japoneses: siluetas planas, pocos elementos, bandas de niebla y negro, carmesí y pergamino. Espacio profundo toma el espíritu de la ciencia ficción del espacio: luz ámbar contra el negro y una escala enorme. Valhalla toma el de las sagas nórdicas: fiordos, barcos de madera, montañas escarpadas, guerreros y piedras rúnicas, sin fantasía exagerada. Olimpo toma el de la Grecia clásica: mármol blanco, templos de columnas, montañas entre nubes y detalles de oro sobre azules profundos; es la sala más luminosa. Esparta toma el de los hoplitas de la Grecia clásica: disciplina y austeridad, cascos corintios de bronce, escudos redondos, lanzas y capas rojas, sin fantasía. Kemet toma el de los murales del Antiguo Egipto, más allá de las pirámides: figuras de perfil, jeroglíficos, oro, lapislázuli, turquesa y arenisca, con un trazo moderno y sencillo.
 
 ## Licencia
 
