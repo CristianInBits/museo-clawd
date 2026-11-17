@@ -2,6 +2,7 @@ import type { ThemeColors } from 'claude-code'
 
 import { FORTALEZA, KATANA, RONIN } from './bushido'
 import { DRAKKAR, JARL, THOR, YGGDRASIL } from './valhalla'
+import { ORACULO, SANTUARIO, ZEUS } from './olimpo'
 import { ANILLOS, SINGULARIDAD, TESELADO } from './espacio'
 import { makeColors } from './make-colors.js'
 
@@ -43,6 +44,7 @@ export const SALAS: Sala[] = [
   { id: 'bushido', nombre: 'Bushidō' },
   { id: 'espacio', nombre: 'Espacio profundo' },
   { id: 'valhalla', nombre: 'Valhalla' },
+  { id: 'olimpo', nombre: 'Olimpo' },
 ]
 
 type Anclas = [string, string, string, string, string, string, string]
@@ -386,6 +388,12 @@ const M_JARL = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><def
 const M_THOR = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><path d="M17 11H20L21 21H16Z" fill="#647c72"/><path d="M8 3.5H25Q23.5 7.2 25 11H8Q9.5 7.2 8 3.5Z" fill="#acb9b7"/><path d="M11 7.2C13 6 15 6 17 7.2C19 8.4 21 8.4 23 7.2" stroke="#345567" stroke-width=".8" fill="none"/><path d="M33 0.5L28.5 9H32L29 17L37 6H33L36 0.5Z" fill="#fff3d6" opacity="0"><animate attributeName="opacity" values="0;1;.2;.9;0;0" keyTimes="0;.05;.1;.15;.25;1" dur="2.4s" repeatCount="indefinite"/></path></svg>`
 const M_YGGDRASIL = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><path d="M15 21Q19 17 18.5 12Q17 8 10 5.5M18.5 12Q21 7 29 4.5M18 9.5Q19 5 21.5 1.5M23 21Q20 17 21 12Q22 9 25 8M5 21Q12 19 19 20Q27 19 35 21" stroke="#647c72" stroke-width="1.7" fill="none" stroke-linecap="round"/><circle r="1.3" fill="#d6a35f"><animateMotion dur="2.2s" repeatCount="indefinite" path="M19.5 20Q21 15 19 11T21 3"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.75;1" dur="2.2s" repeatCount="indefinite"/></circle></svg>`
 
+// Los motivos de Olimpo: la fachada del templo, con la puerta que brilla; el rayo de oro,
+// que destella entre dos estrellas; y la corona de laurel con el fuego del trípode.
+const M_SANTUARIO = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><circle cx="20" cy="11" r="9.5" fill="#c5a46d" opacity=".16"><animate attributeName="opacity" values=".08;.3;.08" dur="3.2s" repeatCount="indefinite"/></circle><path d="M9 7.6L20 3.4L31 7.6Z" fill="#eee8dc"/><rect x="9" y="7.6" width="22" height="1.8" fill="#eee8dc"/><rect x="18.4" y="10.6" width="3.2" height="5.8" fill="#c5a46d"><animate attributeName="opacity" values=".5;1;.7;1;.5" dur="2.6s" repeatCount="indefinite"/></rect><g fill="#eee8dc"><rect x="10.4" y="9.4" width="2.4" height="7"/><rect x="15.2" y="9.4" width="2.4" height="7"/><rect x="22.4" y="9.4" width="2.4" height="7"/><rect x="27.2" y="9.4" width="2.4" height="7"/></g><rect x="8.4" y="16.4" width="23.2" height="1.6" fill="#eee8dc"/><rect x="7.4" y="18" width="25.2" height="1.6" fill="#a8b9c9"/><circle cx="20" cy="3.1" r=".9" fill="#c5a46d"/></svg>`
+const M_ZEUS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><path d="M23.5 .8H30L24.6 8.6H28.6L16.4 21.4L20.2 11.6H16.4Z" fill="#c5a46d" stroke="#f3dca6" stroke-width=".6" stroke-linejoin="round"/><path d="M23.5 .8H30L24.6 8.6H28.6L16.4 21.4L20.2 11.6H16.4Z" fill="#fff6dc" opacity="0"><animate attributeName="opacity" values="0;0;.9;0;0" keyTimes="0;.55;.62;.75;1" dur="2.6s" repeatCount="indefinite"/></path><path d="M9 3.4L9.7 5.3L11.6 6L9.7 6.7L9 8.6L8.3 6.7L6.4 6L8.3 5.3Z" fill="#f3dca6"><animate attributeName="opacity" values=".2;1;.2" dur="1.8s" repeatCount="indefinite"/></path><path d="M33 13.4L33.5 14.7L34.8 15.2L33.5 15.7L33 17L32.5 15.7L31.2 15.2L32.5 14.7Z" fill="#f3dca6"><animate attributeName="opacity" values="1;.2;1" dur="2.2s" repeatCount="indefinite"/></path></svg>`
+const M_ORACULO = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><path d="M17.2 19.2A8.2 8.2 0 0 1 14.2 5.7M22.8 19.2A8.2 8.2 0 0 0 25.8 5.7" stroke="#a8864c" stroke-width=".9" fill="none"/><g fill="#c5a46d"><ellipse cx="15.3" cy="18.2" rx="2.5" ry="1.05" transform="rotate(195 15.3 18.2)"/><ellipse cx="24.7" cy="18.2" rx="2.5" ry="1.05" transform="rotate(-15 24.7 18.2)"/><ellipse cx="12.6" cy="15" rx="2.5" ry="1.05" transform="rotate(225 12.6 15)"/><ellipse cx="27.4" cy="15" rx="2.5" ry="1.05" transform="rotate(-45 27.4 15)"/><ellipse cx="11.8" cy="10.8" rx="2.5" ry="1.05" transform="rotate(255 11.8 10.8)"/><ellipse cx="28.2" cy="10.8" rx="2.5" ry="1.05" transform="rotate(-75 28.2 10.8)"/><ellipse cx="13.3" cy="6.8" rx="2.5" ry="1.05" transform="rotate(285 13.3 6.8)"/><ellipse cx="26.7" cy="6.8" rx="2.5" ry="1.05" transform="rotate(-105 26.7 6.8)"/></g><path d="M17.4 15.8H22.6L21.8 17.2H18.2Z" fill="#b58a48"/><g transform="translate(20 15.6)"><g><animateTransform attributeName="transform" type="scale" values="1 1;.9 1.15;1.06 .9;1 1" dur="1.2s" repeatCount="indefinite"/><path transform="translate(-20 -15.6)" d="M20 15.6C18.2 14.8 18.4 12.6 19.3 11.3C19.5 12.5 20.2 12.7 20.3 11.8C20.9 10.6 20.7 9.3 20.1 8.2C22 9.4 22.6 11.8 22 13.6C21.6 14.8 20.9 15.5 20 15.6Z" fill="#ffd27a"/></g></g></svg>`
+
 // La paleta de Espacio profundo, solo de noche: negros cálidos, acento de luz de
 // estrella y oro para pro.
 function paletaEspacio(nombre: string, id: string) {
@@ -409,6 +417,14 @@ function paletaBushido(nombre: string, id: string) {
 function paletaValhalla(nombre: string, id: string) {
   return paleta(nombre, id, ['#101b26', '#142231', '#18283a', '#1d2f43', '#e4ecea', '#b3c1bf', '#8c9d9c'],
     { accent: '#7fb3c9', danger: '#e2625a', success: '#a3d4ae', warning: '#d6a35f', pro: '#a597d6' })
+}
+
+// La paleta de Olimpo, solo de noche: azul noche y texto blanco mármol. El acento es el azul
+// celestial, el aviso lleva el oro olímpico, el éxito es verde oliva, el peligro rojo
+// terracota y pro un lila, para que en el código no se junten dos colores.
+function paletaOlimpo(nombre: string, id: string) {
+  return paleta(nombre, id, ['#111d32', '#15233b', '#1a2a45', '#20314f', '#eee8dc', '#bcc3cc', '#8e99ab'],
+    { accent: '#8fb6e0', danger: '#e0735a', success: '#a8c48a', warning: '#d6b46f', pro: '#b9a0e0' })
 }
 
 // --- La tabla ---------------------------------------------------------------------
@@ -489,6 +505,12 @@ export const TEMAS: Tema[] = [
     paletaValhalla('Yggdrasil', 'yggdrasil'), YGGDRASIL, M_YGGDRASIL),
   nuevoTema('thor', 'Thor', 'Valhalla', '#0d1620', 'Thor: el dios del trueno alza su martillo en la tormenta.',
     paletaValhalla('Thor', 'thor'), THOR, M_THOR),
+  nuevoTema('santuario', 'Santuario', 'Olimpo', '#14233b', 'Santuario: un templo de mármol sobre las nubes, a la luz del ocaso.',
+    paletaOlimpo('Santuario', 'santuario'), SANTUARIO, M_SANTUARIO),
+  nuevoTema('zeus', 'Zeus', 'Olimpo', '#111d33', 'Zeus: un rayo de oro cruza la tormenta.',
+    paletaOlimpo('Zeus', 'zeus'), ZEUS, M_ZEUS),
+  nuevoTema('oraculo', 'Oráculo', 'Olimpo', '#121c30', 'Oráculo: el busto laureado, a la luz del trípode de Delfos.',
+    paletaOlimpo('Oráculo', 'oraculo'), ORACULO, M_ORACULO),
 ]
 
 /** El tema por su nombre, con o sin tildes y en mayúsculas o minúsculas. */

@@ -16,10 +16,10 @@ Es un proyecto de la comunidad, sin relación con Anthropic. Clawd es la mascota
 
 ## Los temas
 
-Son dieciséis, en cinco salas, y todos son para el modo oscuro.
+Son diecinueve, en seis salas, y todos son para el modo oscuro.
 
 <p align="center">
-  <img src="imagenes/temas.png" width="820" alt="Las escenas de los dieciséis temas, una fila por sala: Circuito, Horizonte y Constelación en Neón nocturno; Boreal, Austral y Bruma en Aurora; Ronin, Katana y Fortaleza en Bushidō; Singularidad, Anillos y Teselado en Espacio profundo; y Drakkar, Jarl, Yggdrasil y Thor en Valhalla">
+  <img src="imagenes/temas.png" width="820" alt="Las escenas de los diecinueve temas, una fila por sala: Circuito, Horizonte y Constelación en Neón nocturno; Boreal, Austral y Bruma en Aurora; Ronin, Katana y Fortaleza en Bushidō; Singularidad, Anillos y Teselado en Espacio profundo; Drakkar, Jarl, Yggdrasil y Thor en Valhalla; y Santuario, Zeus y Oráculo en Olimpo">
 </p>
 
 | Sala | Tema | Cómo es | Qué se mueve |
@@ -40,6 +40,9 @@ Son dieciséis, en cinco salas, y todos son para el modo oscuro.
 | Valhalla | Jarl | Un guerrero nórdico de espaldas en una cresta nevada, con el escudo redondo, el hacha y el casco con cuernos, junto a una piedra rúnica, mirando el fiordo al amanecer. | La capa ondea con las ráfagas, cae la nieve, dos cuervos dan vueltas y unos drakkares diminutos salen del fiordo. |
 | Valhalla | Yggdrasil | El árbol del mundo, con el tronco retorcido y las raíces entrelazadas alrededor de un pozo de luz, y un ciervo que lo mira desde una loma. | Las runas del tronco despiertan una tras otra, suben motas de luz del pozo, la copa se mece y el ciervo mueve la cabeza. |
 | Valhalla | Thor | El dios del trueno en lo alto de un risco, de frente, con el martillo en alto y la capa al viento, en una tormenta sobre el mar. | Los rayos caen en diagonal sobre el martillo, que se enciende, y en el cielo de la izquierda; la capa, el pelo y las nubes se mueven con el viento. |
+| Olimpo | Santuario | Un templo dórico de mármol en lo alto de una montaña que sale de un mar de nubes, dorado por la luz del ocaso, con la luna creciente. | Un águila da vueltas sobre el templo, pasan jirones de nube por delante de la montaña, los cipreses se mecen, la puerta del templo brilla con el fuego de dentro y las estrellas titilan. |
+| Olimpo | Zeus | Un gran rayo de oro que cruza en diagonal un cielo de tormenta, entre nubes estilizadas con volutas. | Una luz recorre el rayo de arriba abajo, su halo late, saltan destellos alrededor y, a lo lejos, la tormenta se ilumina entre las nubes. |
+| Olimpo | Oráculo | Un busto de mármol con la corona de laurel, sobre un pedestal con la máxima de Delfos («conócete a ti mismo»), a la luz del fuego de un trípode, junto a una columna jónica y, a lo lejos, el tolo. | El fuego tiembla y su luz parpadea en el mármol, el humo sube en volutas, suben chispas y las cintas de la corona se mecen. |
 
 En todos, el centro de la escena queda despejado, porque ahí va la conversación, y el movimiento es lento.
 
@@ -100,7 +103,7 @@ Después escribe `/reload-plugins` en una sesión abierta, o abre una sesión nu
 
 ## De dónde salen los dibujos
 
-Los dibujos son propios. Los de Neón nocturno y Aurora están escritos a mano, y los de Bushidō, Espacio profundo y Valhalla los calculan los generadores de `herramientas/` (ver `herramientas/LEEME.md`). Bushidō toma el espíritu de los grabados japoneses: siluetas planas, pocos elementos, bandas de niebla y negro, carmesí y pergamino. Espacio profundo toma el espíritu de la ciencia ficción del espacio: luz ámbar contra el negro y una escala enorme. Valhalla toma el de las sagas nórdicas: fiordos, barcos de madera, montañas escarpadas, guerreros y piedras rúnicas, sin fantasía exagerada.
+Los dibujos son propios. Los de Neón nocturno y Aurora están escritos a mano, y los de Bushidō, Espacio profundo, Valhalla y Olimpo los calculan los generadores de `herramientas/` (ver `herramientas/LEEME.md`). Bushidō toma el espíritu de los grabados japoneses: siluetas planas, pocos elementos, bandas de niebla y negro, carmesí y pergamino. Espacio profundo toma el espíritu de la ciencia ficción del espacio: luz ámbar contra el negro y una escala enorme. Valhalla toma el de las sagas nórdicas: fiordos, barcos de madera, montañas escarpadas, guerreros y piedras rúnicas, sin fantasía exagerada. Olimpo toma el de la Grecia clásica: mármol blanco, templos de columnas, montañas entre nubes y detalles de oro sobre azules profundos; es la sala más luminosa.
 
 ## Licencia
 

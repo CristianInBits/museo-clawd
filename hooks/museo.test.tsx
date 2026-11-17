@@ -65,10 +65,10 @@ const BANDA = {
   view: {},
 }
 
-test('cada una de las cinco salas tiene al menos tres temas, y la aplicación puede pintarlos todos', () => {
-  expect(SALAS.length).toBe(5)
-  expect(TEMAS.length).toBe(16)
-  expect(SALAS.map(s => temasDe(s).length)).toEqual([3, 3, 3, 3, 4])
+test('cada una de las seis salas tiene al menos tres temas, y la aplicación puede pintarlos todos', () => {
+  expect(SALAS.length).toBe(6)
+  expect(TEMAS.length).toBe(19)
+  expect(SALAS.map(s => temasDe(s).length)).toEqual([3, 3, 3, 3, 4, 3])
   expect(new Set(TEMAS.map(t => t.id)).size).toBe(TEMAS.length)
   for (const t of TEMAS) {
     expect(t.problemas.filter(linea => linea.startsWith("Desktop won't paint"))).toEqual([])
@@ -130,12 +130,14 @@ test('/tema singularidad lo pone con su tinte, lo guarda y contesta con el bocad
   expect(r.text).toBe('Singularidad: la luz se curva alrededor de un agujero negro.')
 })
 
-test('/tema constelación acepta tildes y mayúsculas', async ($, on) => {
+test('/tema constelación y /tema oráculo aceptan tildes y mayúsculas', async ($, on) => {
   const m = motor(on)
 
   await tema($, 'CONSTELACIÓN')
+  await tema($, 'Oráculo')
 
   expect(m.puestos[0]?.colors?.label).toBe('Constelación')
+  expect(m.puestos[1]?.colors?.label).toBe('Oráculo')
 })
 
 test('/tema no quita el tema, lo recuerda y ya no avisa al empezar', async ($, on) => {
@@ -161,6 +163,7 @@ test('/tema lista y un nombre desconocido enseñan los temas sin poner ninguno',
   expect(lista.text).toContain('Bushidō: ronin, katana, fortaleza')
   expect(lista.text).toContain('Espacio profundo: singularidad, anillos, teselado')
   expect(lista.text).toContain('Valhalla: drakkar, jarl, yggdrasil, thor')
+  expect(lista.text).toContain('Olimpo: santuario, zeus, oraculo')
   expect(lista.text).not.toContain('marea')
   expect(desconocido.text).toContain('No conozco el tema «volcán».')
   expect(m.puestos.length).toBe(0)
