@@ -41,10 +41,13 @@ function argumentos(t: Tema): ThemeSetArgs {
   }
 }
 
-// Pide a la aplicación el tema y apunta si lo dibuja; no toca lo guardado.
+// Pide a la aplicación el tema y apunta si lo dibuja; no toca lo guardado. Si todavía no
+// se ha conectado ninguna aplicación (al empezar la sesión puede pasar), el tema queda
+// puesto con su `requestId` y se dibuja en cuanto se conecte: eso no es un fallo y no se
+// avisa, porque el aviso se quedaría en el bocadillo con el tema ya a la vista.
 async function aplicar($: EngineInterface, t: Tema): Promise<string> {
   const r = await $.theme.set(argumentos(t))
-  const motivo = r.isDrawn ? '' : r.reason
+  const motivo = r.isDrawn || r.requestId !== undefined ? '' : r.reason
   await update($, puesto, () => t.id)
   await update($, aviso, () => motivo)
 

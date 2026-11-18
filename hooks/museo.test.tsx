@@ -10,9 +10,13 @@ type Puesto = {
 type Motor = Parameters<TestBody>[0]
 type Ganchos = Parameters<TestBody>[1]
 
+// Lo que el motor contesta a $.theme.set: que la aplicación dibuja el tema, salvo que
+// la prueba pida otra cosa.
+type Respuesta = { isDrawn: true; requestId: string } | { isDrawn: false; requestId?: string; reason: string }
+
 // Cada hook de estas pruebas hace de motor: responde a lo que el mod le pide, con
 // un almacén de mentira para $.store.
-function motor(on: Ganchos, guardado = new Map<string, unknown>()) {
+function motor(on: Ganchos, guardado = new Map<string, unknown>(), respuesta: Respuesta = { isDrawn: true, requestId: 'backdrop' }) {
   const puestos: Puesto[] = []
   const avisos: unknown[] = []
   let quitados = 0
@@ -20,7 +24,7 @@ function motor(on: Ganchos, guardado = new Map<string, unknown>()) {
   on('theme.set', (_, e) => {
     puestos.push(e as Puesto)
 
-    return { value: { isDrawn: true, requestId: 'backdrop' } }
+    return { value: respuesta }
   })
   on('theme.clear', () => {
     quitados += 1
@@ -207,6 +211,36 @@ test('el Museo enseña una sala cada vez y pone el tema de la placa que pulsas',
   expect(cerrar?.text).toContain('✕')
   await ui.press({ key: 'cerrar' })
   expect(await ui.find({ key: 'placa-katana' })).toBeUndefined()
+  await ui.unmount()
+})
+
+test('un tema que espera a que se conecte la aplicación no deja un aviso en el bocadillo', async ($, on) => {
+  // Al empezar la sesión aún no hay aplicación conectada: el tema queda puesto, con su
+  // requestId, y se dibujará en cuanto se conecte.
+  motor(on, new Map<string, unknown>([['tema', 'anillos']]), {
+    isDrawn: false,
+    requestId: 'backdrop',
+    reason: 'no attached desktop or mobile client draws themes yet',
+  })
+
+  await empezar($)
+  await tema($, '')
+  const ui = await $.ui.mount({ plugin: 'museo-clawd', surface: 'desktop', component: 'AbovePrompt', props: BANDA })
+
+  expect(await ui.find({ type: 'Text', text: /Anillos: un gigante/ })).toBeDefined()
+  expect(await ui.find({ type: 'Text', text: /no dibuja/ })).toBeUndefined()
+  await ui.unmount()
+})
+
+test('un tema que la aplicación no va a dibujar sí se avisa, en la respuesta y en el bocadillo', async ($, on) => {
+  motor(on, new Map<string, unknown>(), { isDrawn: false, reason: 'esta aplicación no dibuja temas' })
+
+  const r = await tema($, 'anillos')
+  await tema($, '')
+  const ui = await $.ui.mount({ plugin: 'museo-clawd', surface: 'desktop', component: 'AbovePrompt', props: BANDA })
+
+  expect(r.text).toContain('no lo dibuja: esta aplicación no dibuja temas')
+  expect(await ui.find({ type: 'Text', text: /Tu aplicación no dibuja el tema: esta aplicación no dibuja temas/ })).toBeDefined()
   await ui.unmount()
 })
 
