@@ -58,9 +58,9 @@ En todos, el centro de la escena queda despejado, porque ahí va la conversació
 ## Cómo se usa
 
 <p align="center">
-  <img src="imagenes/museo-espacio.png" width="820" alt="El Museo en la sala Espacio profundo: arriba, los botones de las ocho salas, Sin tema y la cruz que lo cierra; el Clawd pintor con su bocadillo, que dice cómo es Anillos; y los cuadros de Singularidad, Anillos y Teselado con sus placas, el de Anillos con el marco dorado">
+  <img src="imagenes/museo-espacio.png" width="820" alt="El Museo en la sala Espacio profundo: arriba, los botones de las nueve salas, Sin tema y la cruz que lo cierra; el Clawd pintor con su bocadillo, que dice cómo es Anillos; y los cuadros de Singularidad, Anillos y Teselado con sus placas, el de Anillos con el marco dorado">
   <br>
-  <img src="imagenes/museo-kemet.png" width="720" alt="El Museo en la sala Kemet, con los cuadros de Faraón, Anubis y Jeroglíficos en sus marcos de madera">
+  <img src="imagenes/museo-nochebuena.png" width="820" alt="El Museo en la sala Nochebuena, con los cuadros de Abeto, Aldea y Trineo en sus marcos de madera">
 </p>
 
 - `/tema` abre el Museo encima de la caja de texto, en la sala del tema que tengas puesto. Los botones de arriba cambian de sala, la placa de cada cuadro pone ese tema, «Sin tema» lo quita y la cruz lo cierra. El tema puesto lleva el marco dorado.
