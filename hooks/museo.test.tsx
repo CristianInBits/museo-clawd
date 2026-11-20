@@ -69,10 +69,10 @@ const BANDA = {
   view: {},
 }
 
-test('cada una de las ocho salas tiene al menos tres temas, y la aplicación puede pintarlos todos', () => {
-  expect(SALAS.length).toBe(8)
-  expect(TEMAS.length).toBe(25)
-  expect(SALAS.map(s => temasDe(s).length)).toEqual([3, 3, 3, 3, 4, 3, 3, 3])
+test('cada una de las nueve salas tiene al menos tres temas, y la aplicación puede pintarlos todos', () => {
+  expect(SALAS.length).toBe(9)
+  expect(TEMAS.length).toBe(28)
+  expect(SALAS.map(s => temasDe(s).length)).toEqual([3, 3, 3, 3, 4, 3, 3, 3, 3])
   expect(new Set(TEMAS.map(t => t.id)).size).toBe(TEMAS.length)
   for (const t of TEMAS) {
     expect(t.problemas.filter(linea => linea.startsWith("Desktop won't paint"))).toEqual([])
@@ -171,6 +171,7 @@ test('/tema lista y un nombre desconocido enseñan los temas sin poner ninguno',
   expect(lista.text).toContain('Olimpo: santuario, zeus, oraculo')
   expect(lista.text).toContain('Esparta: hoplita, falange, termopilas')
   expect(lista.text).toContain('Kemet: faraon, anubis, jeroglificos')
+  expect(lista.text).toContain('Nochebuena: abeto, aldea, trineo')
   expect(lista.text).not.toContain('marea')
   expect(desconocido.text).toContain('No conozco el tema «volcán».')
   expect(m.puestos.length).toBe(0)

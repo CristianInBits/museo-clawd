@@ -6,6 +6,7 @@ import { ORACULO, SANTUARIO, ZEUS } from './olimpo'
 import { FALANGE, HOPLITA, TERMOPILAS } from './esparta'
 import { ANUBIS, FARAON, JEROGLIFICOS } from './kemet'
 import { ANILLOS, SINGULARIDAD, TESELADO } from './espacio'
+import { ABETO, ALDEA, TRINEO } from './nochebuena'
 import { makeColors } from './make-colors.js'
 
 // Los temas de museo-clawd, tres o más por sala: la paleta de cada uno para la
@@ -49,6 +50,7 @@ export const SALAS: Sala[] = [
   { id: 'olimpo', nombre: 'Olimpo' },
   { id: 'esparta', nombre: 'Esparta' },
   { id: 'kemet', nombre: 'Kemet' },
+  { id: 'nochebuena', nombre: 'Nochebuena' },
 ]
 
 type Anclas = [string, string, string, string, string, string, string]
@@ -412,6 +414,14 @@ const M_FARAON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><d
 const M_ANUBIS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><path d="M27 16L30.5 9.6C31.4 7.6 30.8 5.6 29.2 4.8L28.6 4.6L29.6 0.6L27 4.2L25 3.8C22.6 5 20.6 6.6 17.6 7.6C14.6 8.6 11 8.8 7.6 9.6L7 10.6C11 11.2 14.8 11.4 18.4 12.4C20.8 13 22.4 14.6 23 16Z" fill="#0a0f15" stroke="#c9a052" stroke-width=".5" stroke-opacity=".6"/><g><animateTransform attributeName="transform" type="rotate" values="0 25.6 4;0 25.6 4;-16 25.6 4;4 25.6 4;0 25.6 4" keyTimes="0;.7;.78;.86;1" dur="3.2s" repeatCount="indefinite"/><path d="M24.4 4.4L25.2 -0.4L27 4Z" fill="#0a0f15" stroke="#c9a052" stroke-width=".5" stroke-opacity=".6"/></g><path d="M21.4 6.8C22.6 6.2 24 6.4 24.6 7C24 7.6 22.6 7.6 21.4 6.8ZM24.6 7L26.6 6.6" stroke="#e6c272" stroke-width=".7" fill="none"/><path d="M7.4 10.2L17 11" stroke="#c9a052" stroke-width=".5" opacity=".7"/><path d="M22.6 16.6C25 15.4 28.6 15.4 31 16.4" stroke="#c9a052" stroke-width="1.4" fill="none"/><path d="M22 18.6C24.8 17.2 29 17.2 31.8 18.4" stroke="#1c807c" stroke-width="1.4" fill="none"/><path d="M21.4 20.6C24.6 19 29.4 19 32.6 20.4" stroke="#2a5f9a" stroke-width="1.4" fill="none"/></svg>`
 const M_JEROGLIFICOS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><path d="M10 3.6H30C33.6 3.6 35.6 6.6 35.6 11C35.6 15.4 33.6 18.4 30 18.4H10C6.4 18.4 4.4 15.4 4.4 11C4.4 6.6 6.4 3.6 10 3.6ZM37.6 3.6V18.4" stroke="#c9a052" stroke-width="1.4" fill="#16202a"/><path d="M11.2 16.6V10.4M8.6 10.4H13.8M11.2 10.4C9.4 10.4 9.4 6 11.2 6C13 6 13 10.4 11.2 10.4" stroke="#e6c272" stroke-width="1.1" stroke-linecap="round" fill="none" opacity=".35"><animate attributeName="opacity" values=".35;1;.35;.35" keyTimes="0;0.10;0.30;1" dur="3.6s" repeatCount="indefinite"/></path><path d="M16.2 10C17.8 8 22.2 8 23.8 10C22.2 11.4 17.8 11.4 16.2 10ZM20 9.2A.6 .6 0 1 0 20.01 9.2M19 11.2L18 14.6M21 11.2Q22.6 14 24 13.4" stroke="#e6c272" stroke-width="1.1" stroke-linecap="round" fill="none" opacity=".35"><animate attributeName="opacity" values=".35;1;.35;.35" keyTimes="0;0.35;0.55;1" dur="3.6s" repeatCount="indefinite"/></path><path d="M29.4 11m-3.2 0a3.2 3.2 0 1 0 6.4 0a3.2 3.2 0 1 0 -6.4 0M29.4 11m-.7 0a.7 .7 0 1 0 1.4 0a.7 .7 0 1 0 -1.4 0" stroke="#e6c272" stroke-width="1.1" stroke-linecap="round" fill="none" opacity=".35"><animate attributeName="opacity" values=".35;1;.35;.35" keyTimes="0;0.60;0.80;1" dur="3.6s" repeatCount="indefinite"/></path></svg>`
 
+// Los motivos de Nochebuena: el abeto con sus luces, que parpadean cada una a su ritmo, y la
+// estrella, que late; la casa nevada, con la ventana encendida, el humo de la chimenea y
+// copos que caen; y el trineo con dos renos, que cruza la luna dejando chispas de oro.
+const M_ABETO = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><defs><radialGradient id="g"><stop offset="0" stop-color="#f1c88b" stop-opacity=".9"/><stop offset="1" stop-color="#f1c88b" stop-opacity="0"/></radialGradient></defs><circle cx="20" cy="3.2" r="4.6" fill="url(#g)" opacity=".5"><animate attributeName="opacity" values=".2;.75;.2" dur="2s" repeatCount="indefinite"/></circle><path d="M20 3.6L25.6 9.2H23.2L28.2 14.2H25.4L30.8 19.6H9.2L14.6 14.2H11.8L16.8 9.2H14.4Z" fill="#1f5c46"/><path d="M20 3.6L25.6 9.2H23.2L28.2 14.2H25.4L30.8 19.6H20Z" fill="#0b241c" opacity=".35"/><rect x="18.8" y="19.6" width="2.4" height="2.2" fill="#5a3a22"/><circle cx="17.8" cy="10.8" r="1.15" fill="#ffd88f"><animate attributeName="opacity" values="1;.25;1" dur="1.3s" repeatCount="indefinite"/></circle><circle cx="22.2" cy="12.4" r="1.15" fill="#ff8f94"><animate attributeName="opacity" values="1;.25;1" dur="1.7s" begin="-.5s" repeatCount="indefinite"/></circle><circle cx="15.8" cy="16.8" r="1.15" fill="#fff1cf"><animate attributeName="opacity" values="1;.25;1" dur="1.5s" begin="-.9s" repeatCount="indefinite"/></circle><circle cx="20.6" cy="17.6" r="1.15" fill="#ffd88f"><animate attributeName="opacity" values="1;.25;1" dur="1.9s" begin="-.3s" repeatCount="indefinite"/></circle><circle cx="25.2" cy="16.4" r="1.15" fill="#ff8f94"><animate attributeName="opacity" values="1;.25;1" dur="1.2s" begin="-.7s" repeatCount="indefinite"/></circle><path d="M20 .3L20.7 2.2L22.8 2.3L21.1 3.6L21.7 5.5L20 4.4L18.3 5.5L18.9 3.6L17.2 2.3L19.3 2.2Z" fill="#e3b76a"/></svg>`
+const M_ALDEA = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><rect y="19.4" width="40" height="2.6" fill="#7f95b0" opacity=".6"/><path d="M11.4 19.4V11.8L19 6.2L26.6 11.8V19.4Z" fill="#4a3326"/><rect x="22.8" y="5.4" width="2.6" height="4.6" fill="#3b2a25"/><rect x="22.4" y="4.6" width="3.4" height="1.3" rx=".65" fill="#eef3f6"/><path d="M9.6 12.6L19 5.2L28.4 12.6L26.8 13L19 7.2L11.2 13Z" fill="#eef3f6"/><rect x="17" y="13" width="4" height="4" fill="#f1c88b"><animate attributeName="opacity" values="1;.55;.95;.6;1" dur="2.8s" repeatCount="indefinite"/></rect><path d="M19 13V17M17 14.8H21" stroke="#2a1a10" stroke-width=".5"/><g fill="#c8d2de"><circle cx="24.1" cy="3.6" r="1"><animate attributeName="cy" values="3.6;-2.4" dur="2.4s" repeatCount="indefinite"/><animate attributeName="cx" values="24.1;26.4" dur="2.4s" repeatCount="indefinite"/><animate attributeName="r" values="1;2.6" dur="2.4s" repeatCount="indefinite"/><animate attributeName="opacity" values=".85;0" dur="2.4s" repeatCount="indefinite"/></circle><circle cx="24.1" cy="3.6" r="1"><animate attributeName="cy" values="3.6;-2.4" dur="2.4s" begin="-1.2s" repeatCount="indefinite"/><animate attributeName="cx" values="24.1;26.4" dur="2.4s" begin="-1.2s" repeatCount="indefinite"/><animate attributeName="r" values="1;2.6" dur="2.4s" begin="-1.2s" repeatCount="indefinite"/><animate attributeName="opacity" values=".85;0" dur="2.4s" begin="-1.2s" repeatCount="indefinite"/></circle></g><g fill="#edf2ee"><circle cx="5" cy="0" r=".75"><animate attributeName="cy" values="-1;21" dur="3.2s" repeatCount="indefinite"/></circle><circle cx="33.5" cy="0" r=".75"><animate attributeName="cy" values="-1;21" dur="2.8s" begin="-1.5s" repeatCount="indefinite"/></circle><circle cx="37.5" cy="0" r=".6"><animate attributeName="cy" values="-1;21" dur="3.6s" begin="-.6s" repeatCount="indefinite"/></circle><circle cx="2" cy="0" r=".6"><animate attributeName="cy" values="-1;21" dur="3s" begin="-2.2s" repeatCount="indefinite"/></circle></g></svg>`
+const RENITO = 'M22.2 8.6A2.2 .95 0 1 0 26.6 8.6A2.2 .95 0 1 0 22.2 8.6Z'
+const M_TRINEO = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 22"><circle cx="25" cy="10.5" r="9.5" fill="#f2e6c6"/><circle cx="22" cy="8" r="2.4" fill="#ddcfa6" opacity=".6"/><circle cx="28.4" cy="13.4" r="2" fill="#ddcfa6" opacity=".6"/><g><animateTransform attributeName="transform" type="translate" values="-6 3;10 -2" dur="3.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3.6s" repeatCount="indefinite"/><g fill="#f3d58f"><circle cx="12.2" cy="11.8" r=".7"/><circle cx="10.2" cy="12.4" r=".55" opacity=".65"/><circle cx="8.4" cy="12.6" r=".45" opacity=".35"/></g><g fill="#0c1525" stroke="#0c1525" stroke-linecap="round"><path d="M13.4 8.4H14.8L15.6 10H19.4C20 10 20.4 9.6 20.6 9L21.4 9.2C21.2 10.6 20.4 11.4 19.2 11.4H14Z" stroke="none"/><path d="M13 12.4H19.8C20.8 12.4 21.6 11.8 21.6 11" fill="none" stroke-width=".6"/><circle cx="17" cy="8.6" r="1.5" stroke="none"/><circle cx="17.4" cy="6.7" r=".95" stroke="none"/><path d="M16.5 6.1L18.3 5.9L16.2 4.5Z" stroke="none"/><path d="M18.6 8.4L23 8.2M26.8 7.4L29 7" fill="none" stroke-width=".35"/><path d="${RENITO}" stroke="none"/><path d="M25.8 8.2L27 6.4L28.2 6.7M26.8 6.2L26.2 4.8M27.2 6L27.9 4.9M23 9.2L22 10.4M25.6 9.2L26.8 10.2" fill="none" stroke-width=".6"/><g transform="translate(6 -1.2)"><path d="${RENITO}" stroke="none"/><path d="M25.8 8.2L27 6.4L28.2 6.7M26.8 6.2L26.2 4.8M27.2 6L27.9 4.9M23 9.2L22 10.4M25.6 9.2L26.8 10.2" fill="none" stroke-width=".6"/></g></g></g></svg>`
+
 // La paleta de Espacio profundo, solo de noche: negros cálidos, acento de luz de
 // estrella y oro para pro.
 function paletaEspacio(nombre: string, id: string) {
@@ -459,6 +469,17 @@ function paletaEsparta(nombre: string, id: string) {
 function paletaKemet(nombre: string, id: string) {
   return paleta(nombre, id, ['#101820', '#141d27', '#18232f', '#1d2a37', '#ece2c8', '#c7b896', '#9a8e74'],
     { accent: '#3cb8ae', danger: '#e0603c', success: '#8fca7a', warning: '#e3b44f', pro: '#7f9fe6' })
+}
+
+// La paleta de Nochebuena, solo de noche, con el texto blanco nieve: el gris va teñido de
+// verde abeto en Abeto y de azul noche en Aldea y Trineo. El acento es el verde abeto; el
+// aviso, el oro cálido de la estrella; el peligro, el rojo navideño; el éxito, un verde
+// lima; y pro, el azul de la noche. Con el oro de acento, el aviso ámbar se habría
+// confundido con él, como el bronce de Esparta.
+const GRIS_ABETO: Anclas = ['#0f1f1a', '#132620', '#172c25', '#1c332b', '#edf2ee', '#bccbc3', '#8fa59a']
+const GRIS_NOCHE: Anclas = ['#0f1828', '#131e31', '#172439', '#1c2b43', '#edf2ee', '#bac4d0', '#8e9aab']
+function paletaNochebuena(nombre: string, id: string, gris: Anclas) {
+  return paleta(nombre, id, gris, { accent: '#3fae7f', danger: '#b83b42', success: '#a3cf6e', warning: '#e3b76a', pro: '#8aa4e6' })
 }
 
 // --- La tabla ---------------------------------------------------------------------
@@ -557,6 +578,12 @@ export const TEMAS: Tema[] = [
     paletaKemet('Anubis', 'anubis'), ANUBIS, M_ANUBIS),
   nuevoTema('jeroglificos', 'Jeroglíficos', 'Kemet', '#17130e', 'Jeroglíficos: una sala de columnas grabadas, con un haz de sol.',
     paletaKemet('Jeroglíficos', 'jeroglificos'), JEROGLIFICOS, M_JEROGLIFICOS),
+  nuevoTema('abeto', 'Abeto', 'Nochebuena', '#10211b', 'Abeto: un árbol de Navidad con sus luces, su estrella y los regalos en la nieve.',
+    paletaNochebuena('Abeto', 'abeto', GRIS_ABETO), ABETO, M_ABETO),
+  nuevoTema('aldea', 'Aldea', 'Nochebuena', '#111d30', 'Aldea: un pueblo nevado de casas de madera, con humo en las chimeneas.',
+    paletaNochebuena('Aldea', 'aldea', GRIS_NOCHE), ALDEA, M_ALDEA),
+  nuevoTema('trineo', 'Trineo', 'Nochebuena', '#0f1a2c', 'Trineo: Papá Noel y sus renos cruzan la luna.',
+    paletaNochebuena('Trineo', 'trineo', GRIS_NOCHE), TRINEO, M_TRINEO),
 ]
 
 /** El tema por su nombre, con o sin tildes y en mayúsculas o minúsculas. */

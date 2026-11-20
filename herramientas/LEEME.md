@@ -1,6 +1,6 @@
 # Herramientas
 
-Los dibujos de seis de las ocho salas del Museo no están hechos a mano: los calculan estos generadores, que escriben los módulos del mod con las escenas ya listas. Los generadores nuevos comparten las piezas de `comun.mjs`: números al azar repetibles, curvas suaves, bandas que adelgazan, líneas quebradas, degradados, niebla, estrellas y la escritura de los archivos.
+Los dibujos de siete de las nueve salas del Museo no están hechos a mano: los calculan estos generadores, que escriben los módulos del mod con las escenas ya listas. Los generadores nuevos comparten las piezas de `comun.mjs`: números al azar repetibles, curvas suaves, bandas que adelgazan, líneas quebradas, degradados, niebla, estrellas y la escritura de los archivos.
 
 | Generador | Escribe | Qué dibuja |
 | --- | --- | --- |
@@ -10,6 +10,7 @@ Los dibujos de seis de las ocho salas del Museo no están hechos a mano: los cal
 | `genera_olimpo.mjs` | `hooks/olimpo.ts` | Santuario, Zeus y Oráculo: nubes estilizadas de lóbulos redondos con la luz en el borde que mira al sol o al rayo, un templo dórico con sus columnas sombreadas sobre una roca tallada en caras, un rayo de oro con su halo de trazos y volutas en las nubes, y un busto de perfil con rizos y corona de laurel, a la luz de un trípode, con la máxima de Delfos trazada letra a letra. |
 | `genera_esparta.mjs` | `hooks/esparta.ts` | Hoplita, Falange y Termópilas: un casco corintio de bronce con reflejos en franjas y una cresta de crin hecha de capas, una falange calculada en perspectiva (cada hoplita con su escudo, su casco y su lanza, en una ladera que sube para que cada fila asome sobre la de delante) y un paso entre montañas de crestas rotas con un hoplita en silueta y el filo rojo del horizonte. |
 | `genera_kemet.mjs` | `hooks/kemet.ts` | Faraón, Anubis y Jeroglíficos: dieciséis jeroglíficos trazados a mano que se colocan y se escalan número a número (también más estrechos hacia los bordes de una columna, como si la rodearan), un perfil de faraón con el nemes de franjas, el disco solar con los rayos de Atón, Anubis con la balanza que oscila, y una sala de columnas de papiro con un haz de sol. |
+| `genera_nochebuena.mjs` | `hooks/nochebuena.ts` | Abeto, Aldea y Trineo: un árbol de Navidad de pisos de ramas con sus puntas, agujas, guirnaldas de luces en espiral, bolas y una estrella con caras y rayos; un pueblo de casas de madera con el costado en perspectiva, tejados nevados con carámbanos, chimeneas con humo, ventanas encendidas y abetos nevados, bajo una nieve que cae en tres planos; y la silueta de Papá Noel en su trineo con cuatro renos que galopan, delante de la luna, sobre cordilleras de caras planas y filas de abetos. |
 
 Las escenas de Neón nocturno y Aurora están escritas a mano en `hooks/temas.ts`.
 
@@ -39,6 +40,10 @@ node herramientas/genera_esparta.mjs <carpeta para los SVG> hooks/esparta.ts
 
 ```bash
 node herramientas/genera_kemet.mjs <carpeta para los SVG> hooks/kemet.ts
+```
+
+```bash
+node herramientas/genera_nochebuena.mjs <carpeta para los SVG> hooks/nochebuena.ts
 ```
 
 Todos son deterministas: con el mismo código escriben el mismo módulo, byte a byte. Por eso `.gitattributes` fuerza los finales de línea LF.
